@@ -1,0 +1,157 @@
+.signup-form {
+    text-align: center;
+    padding: 36px 15px 10px 15px;
+    border: 4px solid #20B2AA;
+    border-radius: 9px;
+    margin-top: 25px;
+    
+}
+
+
+.signup-form p {
+    font-size: 19px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    padding-bottom: 12px;
+    
+}
+
+.signup-form input[type=text], .signup-form input[type=password] {
+ 
+    padding: 10px 20px;
+    margin: 8px;
+    display: inline-block;
+    border: 1px solid #8c8c8c;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+.signup-form input[type=password] {
+    width: min-content;  
+}
+
+.password {
+    display: flex;
+}
+
+.passError {
+    color: red;
+}
+
+.signup-form button {
+    padding: 9px 68px;
+    margin: 12px 0;
+    margin-top: 30px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.signup-form button:hover {
+    border-radius: 4px;
+    color: #1a1a1a;
+    transition: all 0.5s ease-in-out;
+}
+
+.PhoneInput {
+    width: min-content;
+    margin: 9px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.timezone {
+    margin-right: 90px;
+    margin-top: 8px;
+}
+
+#timezone {
+    padding: 3px 35px;
+    margin-right: 255px;
+}
+
+.dateofbirth {
+    margin-right: 72px;
+    margin-top: 15px;
+}
+
+input[type=date] {
+    padding: 1px 30px;
+    margin-right: 235px;
+    margin-top: 15px;
+}
+
+.gender {
+    margin-top: 12px;
+    margin-right: 440px;
+}
+
+.genderhead {
+    margin-right: 82px;
+}
+
+#female {
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+#male {
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 992px) {
+    
+    .signup-form {
+        margin: auto;
+        padding: auto;
+        flex-direction: column;
+        width: 100%;
+    }
+    form {
+        font-size: small;
+    }
+    .gender {
+        margin: auto;
+    }
+    .PhoneInput {
+        margin: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .timezone {
+        margin: auto;
+        margin-top: 15px;
+        
+    }
+    #timezone {
+        margin: auto;
+        margin-left: 5px;
+    }
+    .dateofbirth{
+        margin: auto;
+    }
+    input[type=date] {
+        margin: auto;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    
+    input[type=password] {
+        /* max-width: 200px; */
+        flex-direction: column;
+        padding: 0px auto;
+    }
+}

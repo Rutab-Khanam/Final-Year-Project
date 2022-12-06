@@ -1,0 +1,29 @@
+.allMeetings p {
+    text-align: center;
+    font-size: 32px;
+    color: #20B2AA;
+}
+
+.tableCol {
+    text-align: center;
+    padding: 10px;
+}
+
+.tableHead th{
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+
+.table th {
+    padding-bottom: 20px;
+}
+
+.table hr {
+    width: 480%;
+    margin-bottom: 10px;
+}
+
+.allMeetings .meetingForm {
+    padding: 30px;
+}

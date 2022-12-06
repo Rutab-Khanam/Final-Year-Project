@@ -1,0 +1,138 @@
+.interface {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 80vh; */
+    position: relative;
+    z-index: 2;
+}
+
+.quot {
+    margin-top: 10px;
+    margin-bottom: 55px;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: 400px;
+    color: black;
+}
+
+.menus {
+    text-align: center;
+    padding-top: 15px;
+}
+
+
+.interfacebtn {
+    margin: 10px;
+    margin-bottom: 10px;
+    font-size: 21px;
+    font-weight: 500;
+    background-color: #20B2AA;
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.interfacebtn:hover {
+    border-radius: 4px;
+    color: #1a1a1a;
+    transition: all 0.5s ease-in-out;
+}
+
+.interfacebtn.btn1 {
+    padding: 12px 25px 12px 137px; 
+}
+
+.interfacebtn.btn2 {
+    padding: 12px 25px 12px 110px;
+}
+
+.interfacebtn.btn3 {
+    padding: 12px 25px 12px 106px;
+}
+
+.interfacebtn.btn4 {
+    padding: 12px 25px 12px 152px;
+}
+
+.interfacebtn.btn5 {
+    padding: 12px 25px 12px 142px;
+}
+
+i.fa.fa-calendar {
+    margin-left: 84px;
+}
+
+i.fa.fa-edit {
+    margin-left: 54px;
+    font-size: 23px;
+}
+
+i.fa.fa-list {
+    margin-left: 50px;
+}
+
+i.fa.fa-bell {
+    margin-left: 98px;
+}
+
+i.fa.fa-book {
+    margin-left: 90px;
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+
+    .quot {
+        display: flex;
+    }
+
+    .interfacebtn {
+        font-size: medium;
+    }
+    
+    .interfacebtn.btn1 {
+        padding: 12px 15px 12px 67px; 
+    }
+    
+    .interfacebtn.btn2 {
+        padding: 12px 15px 12px 50px;
+    }
+    
+    .interfacebtn.btn3 {
+        padding: 12px 15px 12px 46px;
+    }
+    
+    .interfacebtn.btn4 {
+        padding: 12px 15px 12px 92px;
+    }
+    
+    .interfacebtn.btn5 {
+        padding: 12px 15px 12px 82px;
+    }
+
+    i.fa.fa-calendar {
+        margin-left: 54px;
+    }
+    
+    i.fa.fa-edit {
+        margin-left: 24px;
+        font-size: 23px;
+    }
+    
+    i.fa.fa-list {
+        margin-left: 20px;
+    }
+    
+    i.fa.fa-bell {
+        margin-left: 58px;
+    }
+    
+    i.fa.fa-book {
+        margin-left: 60px;
+    }
+}

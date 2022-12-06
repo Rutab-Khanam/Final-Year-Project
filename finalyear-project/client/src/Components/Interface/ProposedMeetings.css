@@ -1,0 +1,76 @@
+.meetingForm {
+    /* position: absolute; */
+    padding: 35px 35px 10px 35px;
+    border: 4px solid #20B2AA;
+    border-radius: 9px;
+    /* margin-left: 220px; */
+    margin-bottom: 200px;
+    /* display: flex; */
+    justify-content: center;
+}
+
+.proposedMeetings p {
+    text-align: center;
+    font-size: 32px;
+    color: #20B2AA;
+}
+
+.proposedMeetings .meetingForm {
+    padding: 30px;
+}
+
+.proposedMeetings .table hr {
+    width: 425%;
+    margin-bottom: 10px;
+}
+/* td.tableCol {
+    cursor: pointer;
+} */
+
+.btn.btn-link.edit {
+    padding: 5px 25px;
+    border-color: transparent;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+.btn.btn-link.delete {
+    background-color: white;
+    color: #20B2AA;
+    border: 1px solid #8c8c8c;
+    border-radius: 3px;
+    padding: 5px 20px;
+    font-size: 15px;
+}
+
+
+@media screen and (max-width: 992px) {
+
+    .proposedMeetings .meetingForm {
+        margin-left: auto;
+        width: fit-content;
+    }
+
+    .proposedMeetings p {
+        font-size: 25px;
+    }
+
+    .proposedMeetings .table hr {
+        width: auto;
+        margin-bottom: 10px;
+    }
+
+    .proposedMeetings td {
+        display: flex;
+    }
+
+    .proposedMeetings .table {
+        display: flex;
+    }
+
+    .proposedMeetings th {
+        display:table-column;
+    }
+}

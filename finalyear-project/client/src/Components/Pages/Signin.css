@@ -1,0 +1,64 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    position: relative;
+    z-index: 2;
+}
+
+.signin-form {
+    text-align: center;
+    padding: 35px 35px 10px 35px;
+    border: 4px solid #20B2AA;
+    border-radius: 9px;
+}
+
+/* form {
+    font-size: 17px;
+} */
+
+.signin-form input[type=text], .signin-form input[type=password] {
+ 
+    padding: 12px 20px;
+    margin: 6px 0;
+    display: inline-block;
+    border: 1px solid #8c8c8c;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+.signin-form button {
+    padding: 9px 68px;
+    margin: 12px 0;
+    margin-top: 30px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.signin-form button:hover {
+    border-radius: 4px;
+    color: #1a1a1a;
+    transition: all 0.5s ease-in-out;
+}
+
+span.psw a {
+    color: #20B2AA;
+}
+
+@media screen and (max-width: 992px) {
+    
+    .signin-form {
+        margin: auto;
+        padding: auto;
+    }
+    form {
+        font-size: small;
+    }
+}

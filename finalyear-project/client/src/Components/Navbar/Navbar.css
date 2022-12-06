@@ -1,0 +1,122 @@
+nav {
+    background: transparent;
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 99;
+}
+
+
+/* .navHome {
+    display: none;
+} */
+
+/* .navInterface {
+    display: none;
+} */
+
+.navInterface {
+    display: flex;
+}
+
+i.fa.fa-cog{
+    padding-top: 35px;
+    padding-right: 15px;
+    color: #8c8c8c;
+}
+
+.menu-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 1;
+}
+
+.menu-list li a {
+    text-decoration: none;
+    color: #20B2AA;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 15px 28px;
+    margin-left: 20px;
+    border-radius: 4px;
+}
+
+.menu-list li:nth-last-child(2) a{
+    border: 2px solid #8c8c8c;
+}
+
+.menu-list li:last-child a{
+    font-weight: 500;
+    padding: 15px 28px;
+    background-color: #20B2AA;
+    color: white;
+    transition: all 0.5s ease-in-out;
+    margin-left: 20px;
+    border-radius: 4px;
+}
+
+.menu-list li a:hover {
+    border-radius: 4px;
+    color: #1a1a1a;
+    transition: all 0.5s ease-in-out;
+}
+
+.menu-icon {
+    display: none;
+    margin-top: 18px;
+    
+}
+
+
+@media screen and (max-width: 800px) {
+    .logo {
+        height: 70px;
+        width: 160px;
+    }
+    .menu-list li a {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .menu-icon {
+        display: block;
+    }
+    .menu-list {
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        background-color: #e6e6e6;
+        opacity: 0.7;
+        padding: 20px;
+        right: 0;
+        top: 87px;
+        transition: all 0.5s ease-in-out;
+    }
+    .menu-list li {
+        
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    .menu-list li:last-child {
+        margin-bottom: 0px;
+    }
+    .menu-list li a,
+    .menu-list li:last-child a {
+        width: 180px;
+        display: block;
+        margin: auto;
+    }
+    .menu-list.close {
+        right: -100%;
+        transition: all 0.5s ease-in-out;
+    }
+}
+

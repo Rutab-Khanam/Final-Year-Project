@@ -1,0 +1,42 @@
+.confirmedMeetings p {
+    text-align: center;
+    font-size: 32px;
+    color: #20B2AA;
+}
+
+.confirmedMeetings .meetingForm {
+    padding: 30px;
+}
+
+.confirmedMeetings .table hr {
+    width: 440%;
+    margin-bottom: 10px;
+}
+
+
+.btn.btn-link.feedback {
+    background-color: white;
+    color: #20B2AA;
+    border: 1px solid #8c8c8c;
+    border-radius: 3px;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+
+.btn.btn-link.update {
+    background-color: white;
+    color: #20B2AA;
+    border: 1px solid #8c8c8c;
+    border-radius: 3px;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+
+.btn.btn-link.start {
+    padding: 5px 25px;
+    border-color: transparent;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+}
