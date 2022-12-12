@@ -31,9 +31,10 @@ const Meeting = (props) => (
 
 
 
-const ProposedMeetings = () => {
+const ProposedMeetings = ({username}) => {
 
-  
+  console.log(username);
+
   const [meetings, setMeetings] = useState([]);  
 
   // This method fetches the meetings from the database.
@@ -49,6 +50,9 @@ const ProposedMeetings = () => {
 
       const meetings = await response.json();
       setMeetings(meetings);
+
+      console.log(meetings);
+      console.log(meetings.host);
     }
 
     getMeetings();
@@ -70,15 +74,18 @@ const ProposedMeetings = () => {
   // This method will map out the meetings on the table
   function meetingsList() {
     return meetings.map((meeting) => {
-      return (
-        <Meeting
-          meeting={meeting}
-          // handleClick={() => handleClick(meeting._id)}
-          deleteMeeting={() => deleteMeeting(meeting._id)}
-          key={meeting._id}
-          // title={meeting.title}
-        />
-      );
+      if(meeting.host == username) {
+        return (
+          <Meeting
+            meeting={meeting}
+            // handleClick={() => handleClick(meeting._id)}
+            deleteMeeting={() => deleteMeeting(meeting._id)}
+            key={meeting._id}
+            // title={meeting.title}
+          />
+        );
+      }
+      
     });
   }
 

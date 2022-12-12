@@ -91,7 +91,8 @@ recordRoutes.route("/meeting/create").post(function (req, response) {
     password: req.body.password,
     dates: req.body.dates,
     createdAt: req.body.createdAt,
-    updatedAt: req.body.updatedAt    
+    updatedAt: req.body.updatedAt,
+    host: req.body.host  
     
   };
   db_connect.collection("meetings").insertOne(myobj, function (err, res) {
@@ -177,7 +178,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       password: req.body.password,
       createdAt: req.body.createdAt,
       updatedAt: req.body.updatedAt,
-      
+      host: req.body.host
     },
   };
   db_connect

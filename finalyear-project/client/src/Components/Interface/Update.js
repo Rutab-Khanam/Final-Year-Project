@@ -16,6 +16,7 @@ const Update = () => {
         password:"",
         createdAt:"",
         updatedAt: "",
+        host: "",
         meetings: [],
       });
       const params = useParams();
@@ -83,6 +84,7 @@ const Update = () => {
           password: form.password,
           createdAt: form.createdAt,
           updatedAt: form.updatedAt,
+          host: form.host
         };
       
         // This will send a post request to update the data in the database.
@@ -94,7 +96,7 @@ const Update = () => {
           },
         });
       
-        navigate("/");
+        navigate("/interface");
       }
 
 
@@ -158,9 +160,11 @@ const Update = () => {
             <br/>
             <input 
                 type={'text'} 
-                placeholder={'username'} 
+                // placeholder={'username'} 
                 size={'40'} 
                 id={'host'} 
+                name='host'
+                value={form.host}
                 disabled 
             />
             </div>

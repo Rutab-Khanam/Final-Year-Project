@@ -4,29 +4,47 @@ import './ConfirmedMeetings.css'
 import Back from './Back';
 
 
-const Meeting = (props) => (
+const Meeting = (props) => {  
+
+  return(
   <tr>
     {/* <td className='tableCol'>{props.meeting.id}</td> */}
     <td className='tableCol'>{props.meeting.title}</td>
     <td className='tableCol'>{props.meeting.start_time}</td>
     <td className='tableCol'>
       &emsp;
-     <Link className="btn btn-link feedback" to={``}>Feedbacks</Link>
+     <Link className="btn btn-link feedback" to={``} 
+            style={ !props.meeting.host ? { display: "none" } : {} } 
+          >Feedbacks</Link>
+     <Link className="btn btn-link feedback" to={``}
+            style={ props.meeting.host ? { display: "none" } : {} }
+          >View</Link>
      &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-     <Link className="btn btn-link update" to={``}>Update</Link>
+     <Link className="btn btn-link update" to={``}
+            style={ !props.meeting.host ? { display: "none" } : {} }
+          >Update</Link>
+     <Link className="btn btn-link update" to={``} 
+            style={ props.meeting.host ? { display: "none" } : {} }
+          >Give Feedback</Link>
      &emsp;
-     <button className='btn btn-link start'>
+     <button className='btn btn-link start' style={ !props.meeting.host ? { display: "none" } : {} } >
         Start Meeting
+     </button>
+     <button className='btn btn-link start' style={ props.meeting.host ? { display: "none" } : {} }>
+        Join Meeting
      </button>
      
     </td>
   </tr>
-);
+  
+)
+    };
 
 
 
-const ConfirmedMeetings = () => {
+const ConfirmedMeetings = ({username}) => {
 
+  console.log("username:", username);
 
   const [meetings, setMeetings] = useState([]);
 
@@ -65,6 +83,7 @@ const ConfirmedMeetings = () => {
   }
 
 
+  
 
 
 

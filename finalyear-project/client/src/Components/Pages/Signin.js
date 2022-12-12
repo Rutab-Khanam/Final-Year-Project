@@ -1,76 +1,33 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Signin.css'
 import { useNavigate } from 'react-router-dom'
 
 
+const Signin = ({setUsername}) => {
 
-const Signin = () => {
+      const [email, setEmail] = useState();
+      const [password, setPassword] = useState();
+      const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const navigate = useNavigate();
-  const UserContext = createContext();
+      let setUser = '';
 
-
-//  const useLogin = () => {
-
-//   const [users, setUsers] = useState([]);  
-
-//   // This method fetches the meetings from the database.
-//   useEffect(() => {
-//     async function getUsers() {
-//       const response = await fetch(`http://localhost:5000/record/validate`);
-
-//       if (!response.ok) {
-//         const message = `An error occurred: ${response.statusText}`;
-//         window.alert(message);
-//         return;
-//       }
-
-//       const users = await response.json();
-//       setUsers(users);
-
-//       if (!users) {
-//             window.alert(`Please check your login information.`);
-//             console.log(users);
-//             // console.log(email);
-//             console.log(response);
-//             navigate("/signin");
-//             return;
-//       } else {
-//             navigate("/interface");
-//       }
-//     }
-
-//     getUsers();
-
-//     return;
-//   }, [users.length]);
-
-// }
-
-  // async function clickLogin() {
-
-  //     getUsers();
-  // }
+      // working
+      useEffect(() => {
+          const found = JSON.parse(localStorage.getItem('user-info'));
+          if (found) {
+              console.log("email: ", email);
+          } else {
+            console.log("No email");
+          }
+      }, []);
   
 
-   
-  // working
-  useEffect(() => {
-      const found = JSON.parse(localStorage.getItem('user-info'));
-      if (found) {
-          console.log("email: ", email);
-      } else {
-        console.log("No email");
-      }
-    }, []);
-  
-    
+
+    // onSubmit function
       async function clickLogin(e) {
-        e.preventDefault(e);
-        // console.warn(email, password);
-  
+
+        e.preventDefault();
+      
         let item = {email, password};
   
         let result = await fetch(`http://localhost:5000/record/validate`, {
@@ -84,7 +41,7 @@ const Signin = () => {
   
         result = await result.json();
         localStorage.setItem("user-info", JSON.stringify(result))
-        
+
         if (!result) {
               window.alert(`Please check your login information.`);
               console.log(email);
@@ -92,71 +49,35 @@ const Signin = () => {
               // navigate("/");
               return;
         } else {
-              navigate("/interface"); 
               console.log("email: ", email);
               console.log("Result:", result);
-              console.log("Result Stringify:", JSON.stringify(result));
+              // console.log("Result Stringify:", JSON.stringify(result));
               // let finalResult = JSON.stringify(result);
               // console.log(typeof(finalResult));
-              // const username = result.username;
-              // console.log("user _id:", username);
-        }
-        
-      }
+              
+              const username = result.username;
+              console.log("Username: ", username);  
+              setUser = username;
+              console.log("setUser: ", setUser); 
+              onLoad();   
+              // navigate("/interface");     
+          }
+            
+    }   
 
- 
-
-  // Try Method
-    // async function clickLogin(e) {
-    //   e.preventDefault(e);
-      
-    //   const response = await fetch(`http://localhost:5000/record/validate`);
-  
-    //   if (!response.ok) {
-    //     const message = `An error has occurred: ${response.statusText}`;
-    //     window.alert(message);
-    //     // console.log(email);
-    //     // console.log(password);
-    //     return;
-    //   }
-  
-    //   const record = await response.json();
-    //   if (!record) {
-    //     window.alert(`Please check your login information.`);
-    //     console.log(record);
-    //     // console.log(email);
-    //     console.log(response);
-    //     navigate("/signin");
-    //     return;
-    //   } else {
-    //     navigate("/interface");
-    //   }
-      
-    // }
-
-    
-  // // This method will map out the meetings on the table
-  // function usersList() {
-  //   return users.map((user => {
-  //     return (
-  //       <User
-  //         user={user}
-  //         // handleClick={() => handleClick(meeting._id)}
-  //         key={user._id}
-  //         // title={meeting.title}
-  //       />
-  //     );
-  //   });
-  // }
-
-   
+    console.log("setUser2: ", setUser);
+     
+    const onLoad = () => {
+      console.log("setUser3: ", setUser);
+      setUsername(setUser);
+      navigate('/interface');
+    }
 
 
   return (
-    <UserContext.Provider value={email}>
     <div className='page'>
     <div className='signin-form '>
-        <form onSubmit={clickLogin}>
+        <form onSubmit={clickLogin} setUser={setUser} >
             <input 
                 type={"text"} 
                 placeholder={"Email address"} 
@@ -175,7 +96,6 @@ const Signin = () => {
                 size={"40"} 
                 title={"Password is required!"} 
                 required 
-                // pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                 name='password' id='password'
                 value={password}
                 onChange={e => setPassword(e.target.value)}
@@ -189,7 +109,6 @@ const Signin = () => {
 
     </div>
     </div>
-    </UserContext.Provider>
   )
 }
 

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './NewMeeting.css';
 import Back from './Back';
+
 var random = require('random-string-alphanumeric-generator');
 
 
-
-const NewMeeting = () => {
+const NewMeeting = ({username}) => {
 
     const [form, setForm] = useState({
         id:"",
@@ -19,7 +19,8 @@ const NewMeeting = () => {
         password:"",
         dates:[],
         createdAt:"",
-        updatedAt:""
+        updatedAt:"",
+        host:""
     });
 
     const navigate = useNavigate(); 
@@ -32,6 +33,7 @@ const NewMeeting = () => {
         form.status = "Proposed";
         form.createdAt = createdAt;
         form.dates = dates;
+        form.host = username;
 
         setForm((preval) => {
             return{
@@ -63,12 +65,12 @@ const NewMeeting = () => {
   
         setForm({ id:"", title:"", description:"", start_time:"", duration:"",
                     status:"", location:"", password:"", dates:[],
-                     createdAt:"", updatedAt:"" });
+                     createdAt:"", updatedAt:"", host:"" });
         
         
         alert("New Meeting Created Successfully!");
         
-        navigate("/");
+        navigate("/interface");
 
     }
 
@@ -97,7 +99,6 @@ const NewMeeting = () => {
         })
     }
 
-
     // Current Date
     const date = new Date();
     const createdAt = date.toLocaleString();
@@ -107,7 +108,7 @@ const NewMeeting = () => {
 
 
 
-  return (
+  return (  
     <div className='interfacePage'>
     <div className='newMeeting'>
         <div className='input0'>
@@ -165,9 +166,11 @@ const NewMeeting = () => {
             <br/>
             <input 
                 type={'text'} 
-                placeholder={'username'} 
+                // placeholder={'username'} 
                 size={'40'} 
                 id={'host'} 
+                name={'host'}
+                value={username}
                 disabled 
             />
             </div>
@@ -282,7 +285,6 @@ const NewMeeting = () => {
             </div>
             
             
-        
         </form>
         </div>
     </div>

@@ -1,16 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Interface.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Signin from '../Pages/Signin';
 
-function Interface() {
+
+function Interface({username}) {
+
+  console.log("Username: ", username);
+
+  // To check current User
+  const [logout, setLogout] = useState(false);
+
+  useEffect(() => {
+      const HandleChange = () => {
+
+          const currentUser = username;
+  
+          const user = "Unknown";
+  
+          if(user === currentUser) {
+              setLogout(true);
+              console.log("logout: ", logout);  
+          } 
+                    
+          return;
+      };
+      HandleChange();
+
+      return;
+  });
+
+
+
+
   return (
     <div className='interface'>
-      <div className='menus'>
+
+      <div className='menus' style={ logout ? { display: "none" } : {} } >
+
           <p className='quot'>Make Time for What Matters</p>
 
           <table>
           <tr>
-          <Link className='interfacebtn btn1' to={"/interface/newMeeting"}> 
+          <Link className='interfacebtn btn1' to={"/interface/newMeeting"} > 
               New Meeting
               <i className='fa fa-calendar'></i>
           </Link>
@@ -51,6 +83,19 @@ function Interface() {
           </table>
         
       </div>  
+
+      <div style={ !logout ? { display: "none" } : {} } >
+
+          <h3>You have been logged out! 
+             <br/> Sign in again to access the interface...</h3>
+
+          <br/>
+          <Link to={"/signin"} className="btn btn-link">Sign in</Link>
+
+          {/* <Signin /> */}
+
+      </div>
+      
 
     </div>
   )
