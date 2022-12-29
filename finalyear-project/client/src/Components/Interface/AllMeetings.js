@@ -16,7 +16,7 @@ const Meeting = (props) => (
 
 
 
-const AllMeetings = () => {
+const AllMeetings = ({username}) => {
 
   const [meetings, setMeetings] = useState([]);
 
@@ -44,21 +44,50 @@ const AllMeetings = () => {
   // This method will map out the meetings on the table
   function meetingsList() {
     return meetings.map((meeting) => {
-      return (
-        <Meeting
-          meeting={meeting}
+      if((meeting.host == username) || (meeting.participant == username)) {
+        return (
+          <Meeting
+            meeting={meeting}
           
-          key={meeting._id}
-        />
-      );
+            key={meeting._id}
+          />
+        );
+      }
     });
   }
+
+
+  // To check current User
+  const [logout, setLogout] = useState(false);
+
+  useEffect(() => {
+    const HandleChange = () => {
+
+        const currentUser = username;
+
+        const user = "Unknown";
+
+        if(user === currentUser) {
+            setLogout(true);
+            console.log("logout: ", logout);  
+        } 
+                  
+        return;
+    };
+    HandleChange();
+
+    return;
+  });
+
+
+
+
 
 
 
   return (
     <div className='interfacePage'>
-    <div className='allMeetings'>
+    <div className='allMeetings' style={ logout ? { display: "none" } : {} } >
 
       <div className='input0'>
           <p>All Meetings</p>
@@ -83,6 +112,17 @@ const AllMeetings = () => {
       </form>
       </div>
     </div>
+
+    <div style={ !logout ? { display: "none" } : {} } >
+
+        <h3>You have been logged out! 
+        <br/> Sign in again to access the interface...</h3>
+
+        <br/>
+        <Link to={"/signin"} className="btn btn-link">Sign in</Link>
+
+    </div>
+
     </div>
   )
 }

@@ -14,12 +14,15 @@ import AllMeetings from './Components/Interface/AllMeetings';
 import Invitations from './Components/Interface/Invitations';
 import Update from './Components/Interface/Update';
 import View from './Components/Interface/View';
+import CheckInvitation from './Components/Interface/CheckInvitation';
 
 
 
 function App() {
 
   const [username, setUsername] = useState('Unknown');
+
+  
 
   return (
     
@@ -37,10 +40,11 @@ function App() {
                 <Route path='/interface/newMeeting' element={<NewMeeting username={username} />} />
                 <Route path='/interface/proposedMeetings' element={<ProposedMeetings username={username} />} />
                 <Route path='/interface/confirmedMeetings' element={<ConfirmedMeetings username={username} />} />
-                <Route path='/interface/allMeetings' element={<AllMeetings />} />
-                <Route path='/interface/invitations' element={<Invitations />} />
+                <Route path='/interface/allMeetings' element={<AllMeetings username={username} />} />
+                <Route path='/interface/invitations' element={<Invitations username={username} />} />
 
-                <Route path="/edit/:id" element={<Update />} />
+                <Route path="/edit/:id" element={<Update username={username} />} />
+                <Route path="/invitation/:id" element={<CheckInvitation username={username} />} />
                 <Route path="/view/:id" element={<View />} />
              
           </Routes>

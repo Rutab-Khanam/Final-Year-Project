@@ -45,6 +45,60 @@
     font-size: 15px;
 }
 
+.invitebtnn {
+    padding: 9px 68px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+    margin: 60px 0px 55px 185px;
+}
+
+.invitebtnn:hover {
+    cursor: pointer;
+}
+
+.invitebtnn:disabled {
+    background-color: #b1e4e1;
+    cursor: move;
+}
+
+.input13 {
+    float: left;
+    margin-left: 40px;
+}
+
+.input14 {
+    float: left;
+    margin-top: 110px;
+    border: 2px solid grey;
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+
+input.dates {
+    padding: 5px 8px;
+    margin: 4px 0px 0px 0px;
+    display: inline-block;
+    border: 1px solid #8c8c8c;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+}
+
+td.participantName {
+    font-size: 17px;
+}
+
+.participantHr {
+    margin: 14px 0px;
+}
+
 
 @media screen and (max-width: 992px) {
 

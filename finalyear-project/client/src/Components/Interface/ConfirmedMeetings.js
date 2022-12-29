@@ -72,16 +72,40 @@ const ConfirmedMeetings = ({username}) => {
   // This method will map out the meetings on the table
   function meetingsList() {
     return meetings.map((meeting) => {
-      return (
-        <Meeting
-          meeting={meeting}
+      if(meeting.host == username) {
+        return (
+          <Meeting
+            meeting={meeting}
           
-          key={meeting._id}
-        />
-      );
+            key={meeting._id}
+          />
+        );
+      }
     });
   }
 
+
+  // To check current User
+  const [logout, setLogout] = useState(false);
+
+  useEffect(() => {
+    const HandleChange = () => {
+
+        const currentUser = username;
+
+        const user = "Unknown";
+
+        if(user === currentUser) {
+            setLogout(true);
+            console.log("logout: ", logout);  
+        } 
+                  
+        return;
+    };
+    HandleChange();
+
+    return;
+  });
 
   
 
@@ -90,7 +114,7 @@ const ConfirmedMeetings = ({username}) => {
 
   return (
     <div className='interfacePage'>
-    <div className='confirmedMeetings'>
+    <div className='confirmedMeetings' style={ logout ? { display: "none" } : {} } >
 
       <div className='input0'>
           <p>Confirmed Meetings</p>
@@ -113,6 +137,17 @@ const ConfirmedMeetings = ({username}) => {
       </form>
       </div>
     </div>
+
+    <div style={ !logout ? { display: "none" } : {} } >
+
+        <h3>You have been logged out! 
+        <br/> Sign in again to access the interface...</h3>
+
+        <br/>
+        <Link to={"/signin"} className="btn btn-link">Sign in</Link>
+
+    </div>
+    
     </div>
   )
 }

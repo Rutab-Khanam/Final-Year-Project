@@ -1,0 +1,11 @@
+
+.searchWrapper {
+    padding: 4px;
+    margin-top: 20px;
+}
+
+.userList input[type='text'] {
+    border: none;
+    padding: 0 0 0 20px;
+    
+}

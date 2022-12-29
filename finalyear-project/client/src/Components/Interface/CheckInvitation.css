@@ -1,0 +1,64 @@
+
+.confirmbtn {
+    padding: 9px 68px;
+    margin: 60px 0px 55px 300px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+    text-align: center;
+    
+}
+
+.confirmbtn:hover {
+    cursor: pointer;
+}
+
+.confirmbtn:disabled{
+    background-color: #b1e4e1;
+    cursor: move;
+}
+
+.cButtonClass {
+    padding: 9px 68px;
+    margin: 60px 0px 55px 100px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+p.note {
+    color: red;
+    font-size: 18px;
+    text-align: start;
+    margin-top: 40px;
+}
+
+
+div.passError {
+    float: left;
+    margin-top: 60px;
+    margin-right: 90px;
+}
+
+.input12 {
+    float: left;
+}
+
+.availableDates {
+    float: left;
+    margin-top: 50px;
+    border: 2px solid grey;
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}

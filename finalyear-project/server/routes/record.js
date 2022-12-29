@@ -90,9 +90,12 @@ recordRoutes.route("/meeting/create").post(function (req, response) {
     location: req.body.location,
     password: req.body.password,
     dates: req.body.dates,
+    datesSelected: req.body.datesSelected,
+    selectDate: req.body.selectDate,
     createdAt: req.body.createdAt,
     updatedAt: req.body.updatedAt,
-    host: req.body.host  
+    host: req.body.host,
+    participant: req.body.participant 
     
   };
   db_connect.collection("meetings").insertOne(myobj, function (err, res) {
@@ -176,9 +179,13 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       status: req.body.status,
       location: req.body.location,
       password: req.body.password,
+      dates: req.body.dates,
+      datesSelected: req.body.datesSelected,
+      selectDate: req.body.selectDate,
       createdAt: req.body.createdAt,
       updatedAt: req.body.updatedAt,
-      host: req.body.host
+      host: req.body.host,
+      participant: req.body.participant
     },
   };
   db_connect
@@ -218,6 +225,20 @@ recordRoutes.route("/record/:id").get(function (req, res) {
       res.json(result);
     });
  });   
+
+
+ // usersList
+// This section will help you get a list of all the users.
+recordRoutes.route("/user").get(function (req, res) {
+  let db_connect = dbo.getDb("liaisonusers");
+  db_connect
+    .collection("records")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+ });
 
 
 

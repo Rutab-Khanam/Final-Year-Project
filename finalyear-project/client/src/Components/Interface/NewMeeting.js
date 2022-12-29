@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './NewMeeting.css';
 import Back from './Back';
+import Participants from './Participants';
+import UsersList from './UsersList';
+import InviteParticipants from './InviteParticipants';
 
 var random = require('random-string-alphanumeric-generator');
 
@@ -18,9 +21,12 @@ const NewMeeting = ({username}) => {
         location:"",
         password:"",
         dates:[],
+        datesSelected:[],
+        selectDate: [],
         createdAt:"",
         updatedAt:"",
-        host:""
+        host:"",
+        participant:[]
     });
 
     const navigate = useNavigate(); 
@@ -32,8 +38,12 @@ const NewMeeting = ({username}) => {
         form.id = meetingid;
         form.status = "Proposed";
         form.createdAt = createdAt;
-        form.dates = dates;
+        // form.dates = dates;
+        form.dates = (Object.values(dates));
+        console.log("form.dates: ", form.dates);
         form.host = username;
+        form.participant = participant;
+        console.log("form.participants: ", form.participant);
 
         setForm((preval) => {
             return{
@@ -64,8 +74,8 @@ const NewMeeting = ({username}) => {
         });
   
         setForm({ id:"", title:"", description:"", start_time:"", duration:"",
-                    status:"", location:"", password:"", dates:[],
-                     createdAt:"", updatedAt:"", host:"" });
+                    status:"", location:"", password:"", dates:[], datesSelected:[],
+                    selectDate:[], createdAt:"", updatedAt:"", host:"", participant:[] });
         
         
         alert("New Meeting Created Successfully!");
@@ -84,8 +94,13 @@ const NewMeeting = ({username}) => {
         datetime4:""
     });
 
+    
     useEffect(() => {
         form.dates = dates;
+        
+        console.log("participants:", participant);
+        // form.participant = participants;
+        form.participant = participant;
     })
 
     const updateDates = (e) => {
@@ -106,19 +121,56 @@ const NewMeeting = ({username}) => {
     // Random Meeting id
     const meetingid = random.randomAlphanumeric(10, "lowercase");
 
+    // Invitations  
+    // let [invite, setInvite] = useState(false);
+
+    // const [participants, setparticipants] = useState(["Unknown"]);
+
+    // console.log("participants in new meeting: ", participants);
+
+    const [participant, setParticipant] = useState(["Unknown"]);
+
+
+    // To check current User
+    const [logout, setLogout] = useState(false);
+
+    useEffect(() => {
+      const HandleChange = () => {
+
+          const currentUser = username;
+  
+          const user = "Unknown";
+  
+          if(user === currentUser) {
+              setLogout(true);
+              console.log("logout: ", logout);  
+          } 
+                    
+          return;
+      };
+      HandleChange();
+
+      return;
+    });
+    
+    
+
+
 
 
   return (  
     <div className='interfacePage'>
-    <div className='newMeeting'>
+    <div className='newMeeting container' style={ logout ? { display: "none" } : {} } >
         <div className='input0'>
             <p>New Meeting</p>
             <Back/>
         </div>
         
-        <div className='newMeetingForm'>
+        <div className='newMeetingForm container'>
 
-        <form onSubmit={onSubmit} >
+        <form onSubmit={onSubmit} className='row'>
+            
+
             <div className='input1'>
             <label htmlFor='title'>Title</label>
             <br/>
@@ -277,17 +329,63 @@ const NewMeeting = ({username}) => {
             />
             </div>
             <br/> <br/>
+
+            
+
+
             <div className='input9'>
 
-            <button className='invitebtn'>Invite Participants</button>
+            {/* <button className='invitebtn' onClick={() => setInvite(true)} >Invite Participants</button> */}
 
             <button className='savebtn'>Save</button>
             </div>
             
             
         </form>
+
+        
+
+        <div className='invitediv row'>
+        {/* <button className='invitebtn' onClick={() => setInvite(true)} >Invite Participants</button> */}
+
+            <InviteParticipants setParticipant={setParticipant} username={username} />
         </div>
+
+
+        </div>
+        
+
+        {/* Prompt for invite participants
+        <Participants trigger={invite} setTrigger={setInvite} participantsListt={participants} 
+        
+            content={
+                <>
+                
+                <p>Select Participants</p> 
+                <UsersList username={username} setParticipants={setparticipants}  />
+                {participants}
+                <br/>
+                
+                </>
+            }
+    
+        >
+        </Participants> */}
+
     </div>
+
+    <div style={ !logout ? { display: "none" } : {} } >
+
+        <h3>You have been logged out! 
+        <br/> Sign in again to access the interface...</h3>
+
+        <br/>
+        <Link to={"/signin"} className="btn btn-link">Sign in</Link>
+
+    </div>
+
+
+
     </div>
   )
 }

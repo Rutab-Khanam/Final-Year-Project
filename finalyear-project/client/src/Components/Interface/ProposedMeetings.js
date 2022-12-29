@@ -69,6 +69,9 @@ const ProposedMeetings = ({username}) => {
 
     const newMeetings = meetings.filter((el) => el._id !== id);
     setMeetings(newMeetings);
+
+    alert("Meeting Deleted!");
+
   }
 
   // This method will map out the meetings on the table
@@ -90,11 +93,33 @@ const ProposedMeetings = ({username}) => {
   }
 
 
+  //  // To check current User
+  //  const [logout, setLogout] = useState(false);
+
+  //  useEffect(() => {
+  //    const HandleChange = () => {
+
+  //        const currentUser = username;
+ 
+  //        const user = "Unknown";
+ 
+  //        if(user === currentUser) {
+  //            setLogout(true);
+  //            console.log("logout: ", logout);  
+  //        } 
+                   
+  //        return;
+  //    };
+  //    HandleChange();
+
+  //    return;
+  //  });
+
 
 
   return (
     <div className='interfacePage'>
-    <div className='proposedMeetings'>
+    <div className='proposedMeetings'  >
 
       <div className='input0'>
           <p>Proposed Meetings</p>
@@ -121,6 +146,18 @@ const ProposedMeetings = ({username}) => {
       </form>
       </div>
     </div>
+
+    {/* <div style={ !logout ? { display: "none" } : {} } >
+
+          <h3>You have been logged out! 
+             <br/> Sign in again to access the interface...</h3>
+
+          <br/>
+          <Link to={"/signin"} className="btn btn-link">Sign in</Link>
+
+      </div> */}
+
+
     </div>
   )
 }

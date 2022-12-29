@@ -1,34 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Back from './Back';
-import InviteParticipants from './InviteParticipants';
+import "./CheckInvitation.css";
 
 
-const ListItem = (props) => {
-
-    return (
-      <>
-      <tr>
-        <td className='participantName' ><li>{props.participantName}</li></td>
-        &emsp; &emsp; &emsp; &emsp; &emsp;
-        {/* <td><li> {props.datesSelected} </li></td> */}
-        <td className='selectedDates' >
-          {props.datesSelected.map((dates, index) => (
-               <tr key={index} > <input className='dates' value={dates} disabled /> </tr>
-          ))}
-
-        </td>
-    
-      </tr>
-      <br/>
-      </>
-    );
-}
-
-
-
-
-const Update = ({username}) => {
+const CheckInvitation = ({username}) => {
 
     const [form, setForm] = useState({
         id:"",
@@ -39,11 +15,12 @@ const Update = ({username}) => {
         status:"",
         location:"",
         password:"",
-        dates:[],
-        datesSelected:[],
         createdAt:"",
         updatedAt: "",
         host: "",
+        dates: [],
+        datesSelected: [],
+        selectDate: [],
         participant: [],
         meetings: [],
       });
@@ -62,11 +39,9 @@ const Update = ({username}) => {
           }
       
           const meeting = await response.json();
-          console.log("meeting:", meeting.datesSelected);
-          // const datesSelected = meeting.datesSelected;
           if (!meeting) {
             window.alert(`Meeting with id ${id} not found`);
-            navigate("/interface/proposedMeetings");
+            navigate("/interface");
             return;
           }
       
@@ -78,15 +53,18 @@ const Update = ({username}) => {
         return;
       }, [params.id, navigate]);
       
-      // console.log("datesSelected: ", datesSelected);
       
       // These methods will update the state properties.
       const updateForm = (e) => {
         console.log(e);
         const {name, value} = e.target;
         
-        form.status = "Confirmed";
-        form.updatedAt = updatedAt;
+        const participantDates = form.datesSelected;
+        const select = form.selectDate; 
+
+        form.selectDate = selectedDates;
+        
+        console.log("form.datesSelected:", participantDates);
 
         setForm((preval) => {
             return{
@@ -100,9 +78,29 @@ const Update = ({username}) => {
       // Current Date
       const date = new Date();
       const updatedAt = date.toLocaleString();
+  
 
-      
+
       async function onSubmit(e) {
+
+        const select = form.selectDate;
+        const participantDates = form.datesSelected;
+
+        if(check == false) {
+                
+            form.datesSelected = [...participantDates, select];
+            console.log("Dates have been selected!");
+            alert("Dates have been selected!");
+            navigate("/interface/invitations");
+
+        } else {
+            console.log("Dates are already selected!");
+            alert("Dates are already selected!");
+            navigate("/interface");
+        }
+                
+        // form.datesSelected = [...participantDates, select];
+
         e.preventDefault();
         const editedPerson = {
           id: form.id,
@@ -113,11 +111,12 @@ const Update = ({username}) => {
           status: form.status,
           location: form.location,
           password: form.password,
-          dates: form.dates,
-          datesSelected: form.datesSelected,
           createdAt: form.createdAt,
           updatedAt: form.updatedAt,
           host: form.host,
+          dates: form.dates,
+          datesSelected: form.datesSelected,
+          selectDate: form.selectDate,
           participant: form.participant
         };
       
@@ -130,20 +129,98 @@ const Update = ({username}) => {
           },
         });
       
-        navigate("/interface");
-      }
+        
+                
+    }
 
 
-    // Invitations  
-    // let [invite, setInvite] = useState(false);
-    const [participant, setParticipant] = useState(["Unknown"]);
+    // Selected Dates
+    const [datesSelected, setDatesSelected] = useState({
+        participant: username,
+        dateselected: [],
+        response: []
+    }, );
 
-    console.log("participant in update: ", participant);
+    const selectedDates = [];
+    const participantDates = form.datesSelected;
+    const select = form.selectDate;
+        
+
+    useEffect(() => {  
+        selectedDates.push(datesSelected);
+        form.selectDate = selectedDates;
+        console.log("selectedDates[0]", selectedDates[0]);
+        // console.log("form.selectDate: ", form.selectDate[0].participant);
+        // console.log("form.datesSelected: ", form.datesSelected);
+        // console.log("form.datesSelected: ", form.datesSelected[1][0].participant);
+        
+    }, [datesSelected]);
+
+
+    let check = false;
+
+
+    for(let i=0; i<participantDates.length; i++) {
+
+        console.log("form.datesSelected: ", form.datesSelected[i]);
+        console.log("form.datesSelected[i]: ", form.datesSelected[i][0].participant);
+
+        if(form.datesSelected[i][0].participant === form.selectDate[0].participant) {
+            check = true;
+        }
+           
+    }
+    
+    // form validation
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [isValid, setValid] = useState(false);
+
+
+    const updateDatesSelected = (e) => {
+        const {value, checked} = e.target;
+        const {dateselected} = datesSelected;
+
+        console.log(`${value} is ${checked}`);
+
+        // form validation
+        if(checked) {
+            setShowErrorMessage(false);
+            setValid(true);
+            
+        } else {
+            setShowErrorMessage(true);
+            setValid(false);
+        }
+     
+
+        // Case 1 : The user checks the box
+        if (checked) {
+        setDatesSelected({
+            participant: username,
+            dateselected: [...dateselected, value],
+            response: [...dateselected, value],
+        });
+
+        }
+  
+        // Case 2  : The user unchecks the box
+        else {
+            setDatesSelected({
+                participant: username,
+                dateselected: dateselected.filter((e) => e !== value),
+                response: dateselected.filter((e) => e !== value),
+            });
+        }
+
+        
+    }
+   
+
 
     // To check current User
-   const [logout, setLogout] = useState(false);
+    const [logout, setLogout] = useState(false);
 
-   useEffect(() => {
+    useEffect(() => {
      const HandleChange = () => {
 
          const currentUser = username;
@@ -163,36 +240,6 @@ const Update = ({username}) => {
    }); 
 
 
-  // Participants
-  const participants = form.datesSelected;
-  console.log("participants in update:", participants);
-
-
-  const listItems = participants.map((number) => 
-    
-    
-    <ListItem 
-        key={number.toString()} 
-        participantName={number[0].participant}
-        datesSelected={number[0].dateselected }
-           
-    /> 
-    
-    
-  
-  );
-
-
-  //     for(let i=0; i<participants.length; i++) {
-  //       console.log("form.datesSelected: ", form.datesSelected[i]);
-  //       console.log("form.datesSelected[i]: ", form.datesSelected[i][0].participant);
-    
-  //       const participantName = participants[i][0].participant;
-  //       content.push(<li key={participantName.i} >{participantName.participant}</li> )       
-  //     }
-
- 
-
 
 
 
@@ -200,7 +247,7 @@ const Update = ({username}) => {
     <div className='interfacePage'>
     <div className='newMeeting' style={ logout ? { display: "none" } : {} } >
         <div className='input0'>
-            <p>Meeting</p>
+            <p>Invitation</p>
             <Back/>
         </div>
         
@@ -247,6 +294,7 @@ const Update = ({username}) => {
                 name='description'
                 value={form.description}
                 onChange={updateForm}
+                disabled
             />
             </div>
             <br/>
@@ -255,7 +303,6 @@ const Update = ({username}) => {
             <br/>
             <input 
                 type={'text'} 
-                // placeholder={'username'} 
                 size={'40'} 
                 id={'host'} 
                 name='host'
@@ -285,6 +332,7 @@ const Update = ({username}) => {
                 value={form.location}                
                 onChange={updateForm}
                 required
+                disabled
                 >
                 <option>Select Location</option>
                 <option value={"Online"} selected>Online</option>
@@ -315,6 +363,7 @@ const Update = ({username}) => {
                 required    
                 value={form.password}
                 onChange={updateForm}
+                disabled
             />
             </div>
             <div className='input7'>
@@ -329,10 +378,11 @@ const Update = ({username}) => {
                 required
                 value={form.duration}
                 onChange={updateForm}
+                disabled
              />
             </div>
             <br/>
-            <div className='input6'>
+            {/* <div className='input6'>
             <label htmlFor='createdAt' >Updated at</label>
             <br/>
             <input 
@@ -343,75 +393,112 @@ const Update = ({username}) => {
                 disabled
                 onChange={updateForm}
             />
-            </div>
-            <br/>
+            </div> */}
+            <br/> <br/>
 
-            <div className='input14'>
-
-              <tr>
-                <th>Participant Name</th>
-                &emsp; &emsp; &emsp; &emsp;
-                <th>Selected Dates</th>
-              </tr>
-              <hr className='participantHr'/>
-              
-              <ul>
-                  {listItems}
-              </ul>
-
-            </div>
-
-            <br/>
-            <div className='input11'>
-            <label htmlFor='start_time' ><b>Final Date</b></label>
             
-            <input 
-                type={'datetime-local'} 
-                id={'start_time'} 
-                name={'start_time'}
-                title={'Please select a final date to fix meeting.'}
-                required
-                value={form.start_time}
-                onChange={updateForm}
-            />
+
+            <div className='check'>
+
+            {showErrorMessage ? <div className='passError' > Please select atleast one option. </div> : ''}
+            
+            </div>
+
+            <br/> 
+            <div className='input6 availableDates'>
+                {/* <fieldset> */}
+                <br/>
+                <label htmlFor='dates' ><b>Dates Available</b></label>
+                <br/> <br/> &emsp;
+                <input 
+                    type={'checkbox'}
+                    id={'dateselected1'}
+                    name={"dateselected"}
+                    value={form.dates.datetime1}
+                    onChange={updateDatesSelected}
+                    
+                />
+                &emsp;
+                <input 
+                    type={'datetime-local'}
+                    id={'dateselected1'}
+                    name={"dateselected"}
+                    value={form.dates.datetime1}
+                    onChange={updateDatesSelected}
+                    disabled
+                />
+                &emsp; &emsp;
+                <input 
+                    type={'checkbox'}
+                    id={'dateselected2'}
+                    name={"dateselected"}
+                    value={form.dates.datetime2}
+                    onChange={updateDatesSelected}
+                />
+                &emsp;
+                <input 
+                    type={'datetime-local'}
+                    id={'dateselected2'}
+                    name={"dateselected"}
+                    value={form.dates.datetime2}
+                    onChange={updateDatesSelected}
+                    disabled
+                />
+                <br/> &emsp;
+                <input 
+                    type={'checkbox'}
+                    id={'dateselected3'}
+                    name={"dateselected"}
+                    value={form.dates.datetime3}
+                    onChange={updateDatesSelected}
+                />
+                &emsp;
+                <input 
+                    type={'datetime-local'}
+                    id={'dateselected3'}
+                    name={"dateselected"}
+                    value={form.dates.datetime3}
+                    onChange={updateDatesSelected}
+                    disabled
+                />
+                &emsp; &emsp;
+                <input 
+                    type={'checkbox'}
+                    id={'dateselected4'}
+                    name={"dateselected"}
+                    value={form.dates.datetime4}
+                    onChange={updateDatesSelected}
+                />
+                &emsp;
+                <input 
+                    type={'datetime-local'}
+                    id={'dateselected4'}
+                    name={"dateselected"}
+                    value={form.dates.datetime4}
+                    onChange={updateDatesSelected}
+                    disabled
+                />
+                <br/>
+                {/* </fieldset> */}
             </div>
 
             <br/> <br/>
-            <div className='input13'>
+            <div className='input12'>
+            <br/> <br/>
+            <p className='note'>Note: &emsp; Please choose the possible dates for participation in the meeting from the given <br/>
+                                &emsp; &emsp; &emsp; available dates to confirm your meeting participation.</p>
 
-            {/* <button className='invitebtn' onClick={() => setInvite(true)} >Invite Participants</button> */}
+            <button  className={"confirmbtn"} disabled={!isValid} >Confirm</button>
 
-            <button className='savebtn'>Fix Meeting</button>
             </div>
+
+            
 
           </form>
 
-
-          
-          <div className='invitediv row'>
-              
-              <InviteParticipants setParticipant={setParticipant} username={username} />
-
-          </div>
-          
-
-
         </div>
 
-        {/* Prompt for invite participants
-        <Participants trigger={invite} setTrigger={setInvite} 
-
-            content={
-              <>
-                <p>Select Participants</p> 
-                <UsersList username={username} />
-                <br/>
-                <button className='invitebtnn'>Invite</button>
-              </>
-            }
         
-        
-        /> */}
             
 
     </div>
@@ -433,4 +520,4 @@ const Update = ({username}) => {
   )
 }
 
-export default Update
+export default CheckInvitation
