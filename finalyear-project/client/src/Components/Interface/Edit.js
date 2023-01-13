@@ -182,51 +182,12 @@ const Edit = ({username}) => {
         }
 
 
-        // for(let i=0; i<form.participantsList.length; i++){
-            
-        //   if(participant == form.participantsList[i]) {
-        //       participantCheck = true;
-        //   }  
-        // }
-
-        // console.log("participant:", participant);
-        // if((participantCheck == false) ) {
-        //     form.participantsList.push(...participant);
-        // }
-        // console.log("participantsList:", form.participantsList);
-
     }, [participant]);
-
-
-    // const participantsList = [];
-    // let participantCheck = false;
-
-    // const updateParticipant = (e) => {
-    //   console.log(e);
-    //   form.participants = participant;
-    //   console.log(participant);
-      
-
-    //   for(let i=0; i<form.participants.length; i++){
-    //     if(participant == 'Unknown') {
-    //         participantCheck = true;
-    //     }
-    //   }
-
-    //   if(participantCheck == false) {
-    //     participantsList.push(...participant);
-    //   }
-      
-    //   console.log("participantsList:", participantsList);
-    //   console.log("form.participants",form.participants);
-
-    // }
 
 
 
     async function onUpdate(e) {
-        // console.log("form.title", form.title);
-        // updateParticipant();
+        
         const editedPerson = {
           id: form.id,
           title: form.title,
@@ -273,7 +234,7 @@ const Edit = ({username}) => {
     
 
 
-    // To check current User
+  // To check current User
    const [logout, setLogout] = useState(false);
 
    useEffect(() => {
@@ -530,20 +491,7 @@ const Edit = ({username}) => {
 
         </div>
 
-        {/* Prompt for invite participants
-        <Participants trigger={invite} setTrigger={setInvite} 
-
-            content={
-              <>
-                <p>Select Participants</p> 
-                <UsersList username={username} />
-                <br/>
-                <button className='invitebtnn'>Invite</button>
-              </>
-            }
         
-        
-        /> */}
             
 
     </div>

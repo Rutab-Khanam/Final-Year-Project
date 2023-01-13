@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import GiveFeedback from './GiveFeedback';
 import Feedbacks from './Feedbacks';
+import Update from './Update';
 
 
 
@@ -177,15 +178,12 @@ const Meeting = (props) => {
       <span style={ !(currentUser == hostName) ? { display: "none" } : {} } >
           <Feedbacks username={props.username} allFeedbacks={props.meeting.feedbacksList} />
       </span>
-       {/* <Link className="btn btn-link feedback" to={``} 
-              style={ !(currentUser == hostName) ? { display: "none" } : {} } 
-            >Feedbacks</Link> */}
-            &emsp;
+        &emsp;
        <Link className="btn btn-link feedback" to={``}
               style={ (currentUser == hostName) ? { display: "none" } : {} }
             >View</Link>
        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-       <Link className="btn btn-link update" to={``}
+       <Link className="btn btn-link update" to={`/update/${props.meeting._id}`}
               style={ !(currentUser == hostName) ? { display: "none" } : {} }
             >Update</Link>
        <span style={ (currentUser == hostName) ? { display: "none" } : {} }>
