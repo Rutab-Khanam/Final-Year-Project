@@ -14,8 +14,8 @@ import AllMeetings from './Components/Interface/AllMeetings';
 import Invitations from './Components/Interface/Invitations';
 import View from './Components/Interface/View';
 import CheckInvitation from './Components/Interface/CheckInvitation';
-// import Update from './Components/Interface/Update';
 import Edit from './Components/Interface/Edit';
+import Update from './Components/Interface/Update';
 
 
 
@@ -46,7 +46,8 @@ function App() {
 
                 <Route path="/edit/:id" element={<Edit username={username} />} />
                 <Route path="/invitation/:id" element={<CheckInvitation username={username} />} />
-                <Route path="/view/:id" element={<View />} />
+                <Route path="/update/:id" element={<Update username={username} />} />
+                <Route path="/view/:id" element={<View username={username} />} />
              
           </Routes>
 
