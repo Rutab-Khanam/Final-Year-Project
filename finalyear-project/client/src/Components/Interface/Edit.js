@@ -28,7 +28,7 @@ const ListItem = (props) => {
 
 
 
-const Update = ({username}) => {
+const Edit = ({username}) => {
 
     const [form, setForm] = useState({
         id:"",
@@ -41,10 +41,14 @@ const Update = ({username}) => {
         password:"",
         dates:[],
         datesSelected:[],
+        selectDate: [],
         createdAt:"",
-        updatedAt: "",
-        host: "",
-        participant: [],
+        updatedAt:"",
+        host:"",
+        participants:[],
+        participantsList:[],
+        feedbackParticipant:{},
+        feedbacksList:[],
         meetings: [],
       });
       const params = useParams();
@@ -82,11 +86,13 @@ const Update = ({username}) => {
       
       // These methods will update the state properties.
       const updateForm = (e) => {
-        console.log(e);
+        // console.log(e);
         const {name, value} = e.target;
         
         form.status = "Confirmed";
         form.updatedAt = updatedAt;
+        // form.participant = [ ...form.participant, ...participant];
+        console.log("form.participants:", form.participants);
 
         setForm((preval) => {
             return{
@@ -115,10 +121,14 @@ const Update = ({username}) => {
           password: form.password,
           dates: form.dates,
           datesSelected: form.datesSelected,
+          selectDate: form.selectDate,
           createdAt: form.createdAt,
           updatedAt: form.updatedAt,
           host: form.host,
-          participant: form.participant
+          participants: form.participants,
+          participantsList: form.participantsList,
+          feedbackParticipant: form.feedbackParticipant,
+          feedbacksList: form.feedbacksList
         };
       
         // This will send a post request to update the data in the database.
@@ -130,15 +140,138 @@ const Update = ({username}) => {
           },
         });
       
-        navigate("/interface");
+        alert("Meeting Fixed!");
+        navigate("/interface/proposedMeetings");
       }
 
 
     // Invitations  
     // let [invite, setInvite] = useState(false);
-    const [participant, setParticipant] = useState(["Unknown"]);
-
+    let [participant, setParticipant] = useState([]);
+    let [validd, setValidd] = useState(false);
+    let listValid = false;
     console.log("participant in update: ", participant);
+    console.log("participantsList:", form.participantsList);
+    console.log("validd:", validd);
+    console.log("listValid:", listValid);
+    
+
+    useEffect(() => {
+
+    //     // setParticipant(participant);
+        form.participants = participant;
+    //     console.log(participant);
+    //     console.log("participant updated");
+    //     onUpdate();
+
+        const participantsListForm = form.participantsList;
+
+        participant.map((item) => {
+            let check = participantsListForm.includes(item);
+          
+            if(!check) {
+                form.participantsList.push(item);
+                listValid = true;
+            }
+        })
+        console.log("participantsList:", form.participantsList);
+
+        // console.log(validd);
+        if((listValid) == true) {
+          onUpdate();
+        }
+
+
+        // for(let i=0; i<form.participantsList.length; i++){
+            
+        //   if(participant == form.participantsList[i]) {
+        //       participantCheck = true;
+        //   }  
+        // }
+
+        // console.log("participant:", participant);
+        // if((participantCheck == false) ) {
+        //     form.participantsList.push(...participant);
+        // }
+        // console.log("participantsList:", form.participantsList);
+
+    }, [participant]);
+
+
+    // const participantsList = [];
+    // let participantCheck = false;
+
+    // const updateParticipant = (e) => {
+    //   console.log(e);
+    //   form.participants = participant;
+    //   console.log(participant);
+      
+
+    //   for(let i=0; i<form.participants.length; i++){
+    //     if(participant == 'Unknown') {
+    //         participantCheck = true;
+    //     }
+    //   }
+
+    //   if(participantCheck == false) {
+    //     participantsList.push(...participant);
+    //   }
+      
+    //   console.log("participantsList:", participantsList);
+    //   console.log("form.participants",form.participants);
+
+    // }
+
+
+
+    async function onUpdate(e) {
+        // console.log("form.title", form.title);
+        // updateParticipant();
+        const editedPerson = {
+          id: form.id,
+          title: form.title,
+          description: form.description,
+          start_time: form.start_time,
+          duration: form.duration,
+          status: form.status,
+          location: form.location,
+          password: form.password,
+          dates: form.dates,
+          datesSelected: form.datesSelected,
+          selectDate: form.selectDate,
+          createdAt: form.createdAt,
+          updatedAt: form.updatedAt,
+          host: form.host,
+          participants: form.participants,
+          participantsList: form.participantsList,
+          feedbackParticipant: form.feedbackParticipant,
+          feedbacksList: form.feedbacksList
+        };
+      
+        console.log(participant.length);
+
+        if(participant.length > 0) {
+
+            // This will send a post request to update the data in the database.
+            await fetch(`http://localhost:5000/update/${params.id}`, {
+              method: "POST",
+              body: JSON.stringify(editedPerson),
+              headers: {
+                'Content-Type': 'application/json'
+              },
+            });
+
+            console.log("PARAMS.ID", params.id);
+            // console.log(editedPerson.participants);
+            console.log("Participants Invited!");
+        }
+        
+
+    }
+
+
+    
+
 
     // To check current User
    const [logout, setLogout] = useState(false);
@@ -164,22 +297,19 @@ const Update = ({username}) => {
 
 
   // Participants
-  const participants = form.datesSelected;
-  console.log("participants in update:", participants);
+  const participantsDates = form.datesSelected;
+  console.log("participantsDates in update:", participantsDates);
 
 
-  const listItems = participants.map((number) => 
-    
-    
+  const listItems = participantsDates.map((number) => 
+      
     <ListItem 
         key={number.toString()} 
         participantName={number[0].participant}
         datesSelected={number[0].dateselected }
            
     /> 
-    
-    
-  
+      
   );
 
 
@@ -379,7 +509,7 @@ const Update = ({username}) => {
             <br/> <br/>
             <div className='input13'>
 
-            {/* <button className='invitebtn' onClick={() => setInvite(true)} >Invite Participants</button> */}
+            {/* <InviteParticipants setParticipant={setParticipant} username={username} /> */}
 
             <button className='savebtn'>Fix Meeting</button>
             </div>
@@ -390,8 +520,10 @@ const Update = ({username}) => {
           
           <div className='invitediv row'>
               
-              <InviteParticipants setParticipant={setParticipant} username={username} />
-
+               <InviteParticipants 
+                  setParticipant={setParticipant} setValidd={setValidd} 
+                  username={username} onClick={onUpdate} />
+             
           </div>
           
 
@@ -433,4 +565,4 @@ const Update = ({username}) => {
   )
 }
 
-export default Update
+export default Edit

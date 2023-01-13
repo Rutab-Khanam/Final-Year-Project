@@ -1,0 +1,63 @@
+.feedbacksListPrompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedbacksListPromptInner {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 780px;
+    background-color: white;
+}
+
+i.fa.fa-times::before {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    margin-left: 100px;
+}
+
+.i.fa.fa-times:hover {
+    cursor: pointer;
+}
+
+.sendBtn {
+    padding: 9px 68px;
+    border: none;
+    color: white; 
+    font-weight: 500;
+    background-color: #20B2AA;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 25px;
+    /* margin: 60px 0px 55px 185px; */
+}
+
+.sendBtn:hover {
+    color: black;
+}
+
+.sendBtn:disabled {
+    background-color: #b1e4e1;
+    cursor: move;
+}
+
+.sendBtn:disabled:hover {
+    color: white;
+}
+
+div.passError2 {
+    color: red;
+    /* /* float: left; */
+    margin-top: 25px;
+}

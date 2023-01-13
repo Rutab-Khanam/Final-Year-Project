@@ -7,47 +7,47 @@ import './Participants.css'
 const Participants = (props) => {
 
   
-    const [participantsList, setParticipantsList] = useState(['']);
+    // const [participantsList, setParticipantsList] = useState(['']);
 
-    // form validation
-    const [showErrorMessage, setShowErrorMessage] = useState(false);
-    const [isValid, setValid] = useState(false);
+    // // form validation
+    // const [showErrorMessage, setShowErrorMessage] = useState(false);
+    // const [isValid, setValid] = useState(false);
 
-    const validity = (e) => {
+    // const validity = (e) => {
       
-      if(props.participantsListt.length > 0) {
+    //   if(props.participantsListt.length > 0) {
         
-          setShowErrorMessage(false);
-          setValid(true);
+    //       setShowErrorMessage(false);
+    //       setValid(true);
 
-      } else {
-          setShowErrorMessage(true);
-          setValid(false);
-      }
-    }
+    //   } else {
+    //       setShowErrorMessage(true);
+    //       setValid(false);
+    //   }
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        validity();
+    //     validity();
 
-    }, [props.participantsListt]);
+    // }, [props.participantsListt]);
 
 
-    // invite button
-    const inviteClick = () => {
-        console.log("props.participantsListt: ", props.participantsListt);
-        setParticipantsList(props.participantsListt);
-        console.log("participantsList in participants: ", participantsList);
-        console.log(participantsList.length);
-        console.log(Object.keys(participantsList));
+    // // invite button
+    // const inviteClick = () => {
+    //     console.log("props.participantsListt: ", props.participantsListt);
+    //     // setParticipantsList(props.participantsListt);
+    //     // console.log("participantsList in participants: ", participantsList);
+    //     // console.log(participantsList.length);
+    //     // console.log(Object.keys(participantsList));
 
-        if(participantsList.length > 1){
+    //     // if(participantsList.length > 1){
             
-            props.setTrigger(false);
+    //     //     props.setTrigger(false);
  
-        } 
+    //     // } 
                 
-    }
+    // }
   
   
 
@@ -59,9 +59,9 @@ const Participants = (props) => {
                 {/* {props.children} */}
                 {props.content}
 
-                {showErrorMessage ? <div className='passError' > Please select participants. </div> : ''}
+                {/* {showErrorMessage ? <div className='passError' > Please select participants. </div> : ''} */}
                 
-                <button className='invitebtnn' onClick={inviteClick} disabled={!isValid} >Invite</button>
+                {/* <button className='invitebtnn' onClick={inviteClick} disabled={!isValid} >Invite</button> */}
             </div>
             {/* <UsersList/> */}
         </div>

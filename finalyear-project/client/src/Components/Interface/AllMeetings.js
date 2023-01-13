@@ -6,7 +6,7 @@ import Back from './Back';
 
 const Meeting = (props) => (
   <tr>
-    <td className='tableCol'>{props.meeting.id}</td>
+    <td className='tableCol'>{props.meeting.host}</td>
     <td className='tableCol'>{props.meeting.title}</td>
     <td className='tableCol'>{props.meeting.createdAt}</td> 
     <td className='tableCol'>{props.meeting.start_time}</td>
@@ -43,12 +43,31 @@ const AllMeetings = ({username}) => {
 
   // This method will map out the meetings on the table
   function meetingsList() {
+
     return meetings.map((meeting) => {
-      if((meeting.host == username) || (meeting.participant == username)) {
+      console.log("username:", username);
+      let part = false;
+      const participantList = meeting.participantsList;
+      console.log("meeting.participantsList:", meeting.participantsList);
+
+      participantList.map((names) => {
+        console.log("names:", names);
+        console.log("username:", username);
+          if(names == username) {
+            part = true;
+          }
+          console.log("part:", part);
+          console.log(meeting.host);
+      })
+
+      console.log("Checking map");
+      console.log(part);
+
+      if((meeting.host == username) || (part == true)) {
         return (
           <Meeting
             meeting={meeting}
-          
+            username={username}
             key={meeting._id}
           />
         );
@@ -98,13 +117,13 @@ const AllMeetings = ({username}) => {
           <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
           <tr className='tableHead'>
-            <th>Meeting ID</th>
+            <th>Meeting Host</th>
             <th>Meeting Title</th>
             <th>Created At</th>
             <th>Start Time</th>
             <th>Status</th>
           </tr>   
-          <hr/>
+          <hr className='allmeetingsHr'/>
           </thead>
 
           <tbody>{meetingsList()}</tbody>

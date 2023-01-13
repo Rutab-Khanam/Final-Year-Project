@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import './NewMeeting.css';
 import Back from './Back';
-import Participants from './Participants';
-import UsersList from './UsersList';
 import InviteParticipants from './InviteParticipants';
 
 var random = require('random-string-alphanumeric-generator');
@@ -26,7 +24,10 @@ const NewMeeting = ({username}) => {
         createdAt:"",
         updatedAt:"",
         host:"",
-        participant:[]
+        participants:[],
+        participantsList:[],
+        feedbackParticipant:[],
+        feedbacksList:[]
     });
 
     const navigate = useNavigate(); 
@@ -42,8 +43,8 @@ const NewMeeting = ({username}) => {
         form.dates = (Object.values(dates));
         console.log("form.dates: ", form.dates);
         form.host = username;
-        form.participant = participant;
-        console.log("form.participants: ", form.participant);
+        form.participants = participant;
+        console.log("form.participants: ", form.participants);
 
         setForm((preval) => {
             return{
@@ -75,7 +76,8 @@ const NewMeeting = ({username}) => {
   
         setForm({ id:"", title:"", description:"", start_time:"", duration:"",
                     status:"", location:"", password:"", dates:[], datesSelected:[],
-                    selectDate:[], createdAt:"", updatedAt:"", host:"", participant:[] });
+                    selectDate:[], createdAt:"", updatedAt:"", host:"", participants:[], 
+                    participantsList:[], feedbackParticipant:[], feedbacksList:[] });
         
         
         alert("New Meeting Created Successfully!");
@@ -94,14 +96,57 @@ const NewMeeting = ({username}) => {
         datetime4:""
     });
 
-    
-    useEffect(() => {
-        form.dates = dates;
+    let newParticipants = [];
+    const [participant, setParticipant] = useState([]);
+    let participantCheck = false;
+    console.log("participant:", participant);
+
+    for(let i=0; i<form.participantsList.length; i++){
+            
+        for(let j=0; j<participant.length; j++){
+            console.log("participant[j]:", participant[j]);
+            if(participant[j] !== form.participantsList[i]) {
+                // participantCheck = true;
+                // newParticipants.push(participant[j]);
+                console.log("newParticipants:", newParticipants);
+            }  
+        }
         
+    }
+    console.log("newParticipants:", newParticipants);
+
+    // useEffect(() => {
+    //     form.dates = dates;
+    //     form.participants = participant;
+    //     console.log("form.participants:", form.participants);
+    // });
+    
+
+    useEffect(() => {
+        
+        form.dates = dates;
+        form.participants = participant;
+        console.log("form.participants:", form.participants);
         console.log("participants:", participant);
-        // form.participant = participants;
-        form.participant = participant;
-    })
+        console.log("participant data type:", Array.isArray(participant));
+        console.log("feedbacksList:", form.feedbacksList);
+
+        const participantsListForm = form.participantsList;
+
+        participant.map((item) => {
+            let check = participantsListForm.includes(item);
+              
+              if(!check) {
+                form.participantsList.push(item);
+            }
+        })
+        console.log("participantsList:", form.participantsList);
+        // if((participantCheck == false) ) {
+        //     form.participantsList.push(...participant);
+        // }
+        
+    }, [participant]);
+
 
     const updateDates = (e) => {
         const {name, value} = e.target;
@@ -128,7 +173,7 @@ const NewMeeting = ({username}) => {
 
     // console.log("participants in new meeting: ", participants);
 
-    const [participant, setParticipant] = useState(["Unknown"]);
+    
 
 
     // To check current User

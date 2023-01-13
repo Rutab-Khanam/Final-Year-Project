@@ -2,43 +2,55 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import './ConfirmedMeetings.css'
 import Back from './Back';
+// import GiveFeedback from './GiveFeedback';
+import Meeting from './Meeting';
 
 
-const Meeting = (props) => {  
+// const Meeting = (props) => {  
 
-  return(
-  <tr>
-    {/* <td className='tableCol'>{props.meeting.id}</td> */}
-    <td className='tableCol'>{props.meeting.title}</td>
-    <td className='tableCol'>{props.meeting.start_time}</td>
-    <td className='tableCol'>
-      &emsp;
-     <Link className="btn btn-link feedback" to={``} 
-            style={ !props.meeting.host ? { display: "none" } : {} } 
-          >Feedbacks</Link>
-     <Link className="btn btn-link feedback" to={``}
-            style={ props.meeting.host ? { display: "none" } : {} }
-          >View</Link>
-     &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-     <Link className="btn btn-link update" to={``}
-            style={ !props.meeting.host ? { display: "none" } : {} }
-          >Update</Link>
-     <Link className="btn btn-link update" to={``} 
-            style={ props.meeting.host ? { display: "none" } : {} }
-          >Give Feedback</Link>
-     &emsp;
-     <button className='btn btn-link start' style={ !props.meeting.host ? { display: "none" } : {} } >
-        Start Meeting
-     </button>
-     <button className='btn btn-link start' style={ props.meeting.host ? { display: "none" } : {} }>
-        Join Meeting
-     </button>
-     
-    </td>
-  </tr>
+//   const currentUser = props.username;
+//   const hostName = props.meeting.host;
+
+//   const [feedback, setFeedback] = useState(["Unknown"]);
   
-)
-    };
+//   return(
+//   <tr>
+//     {/* <td className='tableCol'>{props.meeting.id}</td> */}
+//     <td className='tableCol'>{props.meeting.title}</td>
+//     <td className='tableCol'>{props.meeting.start_time}</td>
+//     <td className='tableCol'>
+//       &emsp;
+//      <Link className="btn btn-link feedback" to={``} 
+//             style={ !(currentUser == hostName) ? { display: "none" } : {} } 
+//           >Feedbacks</Link>
+//           &emsp;
+//      <Link className="btn btn-link feedback" to={``}
+//             style={ (currentUser == hostName) ? { display: "none" } : {} }
+//           >View</Link>
+//      &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+//      <Link className="btn btn-link update" to={``}
+//             style={ !(currentUser == hostName) ? { display: "none" } : {} }
+//           >Update</Link>
+//      <span style={ (currentUser == hostName) ? { display: "none" } : {} }>
+//         <GiveFeedback setFeedback={setFeedback} username={props.username} />
+//       </span>     
+     
+//      {/* <Link className="btn btn-link update" to={``} 
+//             style={ (currentUser == hostName) ? { display: "none" } : {} }
+//           >Give Feedback</Link> */}
+//      &emsp;
+//      <button className='btn btn-link start' style={ !(currentUser == hostName) ? { display: "none" } : {} } >
+//         Start Meeting
+//      </button>
+//      <button className='btn btn-link join' style={ (currentUser == hostName) ? { display: "none" } : {} }>
+//         Join Meeting
+//      </button>
+     
+//     </td>
+//   </tr>
+  
+// )
+// };
 
 
 
@@ -69,14 +81,34 @@ const ConfirmedMeetings = ({username}) => {
   }, [meetings.length]);
 
 
+
   // This method will map out the meetings on the table
   function meetingsList() {
+
     return meetings.map((meeting) => {
-      if(meeting.host == username) {
+      console.log("username:", username);
+      let part = false;
+      const participantList = meeting.participantsList;
+      console.log("meeting.participant:", meeting.participantsList);
+
+      participantList.map((names) => {
+        console.log("names:", names);
+        console.log("username:", username);
+          if(names == username) {
+            part = true;
+          }
+          console.log("part:", part);
+          console.log(meeting.host);
+      })
+
+      console.log("Checking map");
+      console.log(part);
+
+      if((meeting.host == username) || (part == true)) {
         return (
           <Meeting
             meeting={meeting}
-          
+            username={username}
             key={meeting._id}
           />
         );
@@ -121,7 +153,6 @@ const ConfirmedMeetings = ({username}) => {
           <Back/>
       </div>
       <div className='meetingForm'>
-      <form>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>
           <tr className='tableHead'>
@@ -130,11 +161,10 @@ const ConfirmedMeetings = ({username}) => {
             <th>Start Time</th>
             <th>Action</th>
           </tr>
-          <hr/>
+          <hr className='confirmedHr'/>
           </thead>
           <tbody>{meetingsList()}</tbody>
         </table>
-      </form>
       </div>
     </div>
 

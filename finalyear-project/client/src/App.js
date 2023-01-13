@@ -12,9 +12,10 @@ import ProposedMeetings from './Components/Interface/ProposedMeetings';
 import ConfirmedMeetings from './Components/Interface/ConfirmedMeetings';
 import AllMeetings from './Components/Interface/AllMeetings';
 import Invitations from './Components/Interface/Invitations';
-import Update from './Components/Interface/Update';
 import View from './Components/Interface/View';
 import CheckInvitation from './Components/Interface/CheckInvitation';
+// import Update from './Components/Interface/Update';
+import Edit from './Components/Interface/Edit';
 
 
 
@@ -43,7 +44,7 @@ function App() {
                 <Route path='/interface/allMeetings' element={<AllMeetings username={username} />} />
                 <Route path='/interface/invitations' element={<Invitations username={username} />} />
 
-                <Route path="/edit/:id" element={<Update username={username} />} />
+                <Route path="/edit/:id" element={<Edit username={username} />} />
                 <Route path="/invitation/:id" element={<CheckInvitation username={username} />} />
                 <Route path="/view/:id" element={<View />} />
              

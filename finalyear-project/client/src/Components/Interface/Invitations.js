@@ -60,12 +60,12 @@ const Invitations = ({username}) => {
   // This method will map out the meetings on the table
   function meetingsList() {
     return meetings.map((meeting, index) => {
-      console.log("meeting.participant: ", meeting.participant);
+      console.log("meeting.participantsList: ", meeting.participantsList);
       console.log("meetings index: ", (index));
-      let meetingParticipants = meeting.participant;
+      let meetingParticipants = meeting.participantsList;
       console.log("meetingParticipants: ", meetingParticipants);
       console.log(meetingParticipants);
-      if(meeting.participant) {
+      if(meeting.participantsList) {
         console.log(meetingParticipants.length);
         console.log(meetingParticipants[0]);
         const part = [];
@@ -122,7 +122,7 @@ const Invitations = ({username}) => {
 
   return (
     <div className='interfacePage'>
-    <div className='proposedMeetings'  >
+    <div className='proposedMeetings' style={ logout ? { display: "none" } : {} }  >
 
       <div className='input0'>
           <p>Invitations</p>

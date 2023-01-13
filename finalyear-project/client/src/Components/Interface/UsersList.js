@@ -83,6 +83,10 @@ const UsersList = ({username, setParticipants}) => {
         
     };
     console.log("usernames: ", usernames);
+
+    // if(meeting.participants == undefined) {
+    //     meeting.participants = ["Unknown"];
+    // }
     console.log("meeting.partiticpant:", meeting.participant);
 
     // extracting current user from userList

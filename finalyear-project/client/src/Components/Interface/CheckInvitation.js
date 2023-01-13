@@ -21,7 +21,8 @@ const CheckInvitation = ({username}) => {
         dates: [],
         datesSelected: [],
         selectDate: [],
-        participant: [],
+        participants: [],
+        participantsList: [],
         meetings: [],
       });
       const params = useParams();
@@ -60,7 +61,7 @@ const CheckInvitation = ({username}) => {
         const {name, value} = e.target;
         
         const participantDates = form.datesSelected;
-        const select = form.selectDate; 
+        // const select = form.selectDate; 
 
         form.selectDate = selectedDates;
         
@@ -117,7 +118,8 @@ const CheckInvitation = ({username}) => {
           dates: form.dates,
           datesSelected: form.datesSelected,
           selectDate: form.selectDate,
-          participant: form.participant
+          participants: form.participants,
+          participantsList: form.participantsList
         };
       
         // This will send a post request to update the data in the database.
@@ -143,7 +145,7 @@ const CheckInvitation = ({username}) => {
 
     const selectedDates = [];
     const participantDates = form.datesSelected;
-    const select = form.selectDate;
+    // const select = form.selectDate;
         
 
     useEffect(() => {  

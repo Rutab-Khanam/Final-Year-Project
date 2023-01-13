@@ -95,8 +95,11 @@ recordRoutes.route("/meeting/create").post(function (req, response) {
     createdAt: req.body.createdAt,
     updatedAt: req.body.updatedAt,
     host: req.body.host,
-    participant: req.body.participant 
-    
+    participants: req.body.participants,
+    participantsList: req.body.participantsList,
+    feedbackParticipant: req.body.feedbackParticipant,
+    feedbacksList: req.body.feedbacksList
+
   };
   db_connect.collection("meetings").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -185,7 +188,10 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       createdAt: req.body.createdAt,
       updatedAt: req.body.updatedAt,
       host: req.body.host,
-      participant: req.body.participant
+      participants: req.body.participants,
+      participantsList: req.body.participantsList,
+      feedbackParticipant: req.body.feedbackParticipant,
+      feedbacksList: req.body.feedbacksList
     },
   };
   db_connect

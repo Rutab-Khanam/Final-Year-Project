@@ -19,8 +19,8 @@
     padding-bottom: 20px;
 }
 
-.table hr {
-    width: 480%;
+hr.allmeetingsHr {
+    width: 460%;
     margin-bottom: 10px;
 }
 

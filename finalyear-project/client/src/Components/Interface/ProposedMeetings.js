@@ -93,40 +93,39 @@ const ProposedMeetings = ({username}) => {
   }
 
 
-  //  // To check current User
-  //  const [logout, setLogout] = useState(false);
+   // To check current User
+   const [logout, setLogout] = useState(false);
 
-  //  useEffect(() => {
-  //    const HandleChange = () => {
+   useEffect(() => {
+     const HandleChange = () => {
 
-  //        const currentUser = username;
+         const currentUser = username;
  
-  //        const user = "Unknown";
+         const user = "Unknown";
  
-  //        if(user === currentUser) {
-  //            setLogout(true);
-  //            console.log("logout: ", logout);  
-  //        } 
+         if(user === currentUser) {
+             setLogout(true);
+             console.log("logout: ", logout);  
+         } 
                    
-  //        return;
-  //    };
-  //    HandleChange();
+         return;
+     };
+     HandleChange();
 
-  //    return;
-  //  });
+     return;
+   });
 
 
 
   return (
     <div className='interfacePage'>
-    <div className='proposedMeetings'  >
+    <div className='proposedMeetings' style={ logout ? { display: "none" } : {} } >
 
       <div className='input0'>
           <p>Proposed Meetings</p>
           <Back/>
       </div>
       <div className='meetingForm'>
-      <form>
         <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
         <tr className='tableHead'>
@@ -141,13 +140,10 @@ const ProposedMeetings = ({username}) => {
 
         </table>
 
- 
-
-      </form>
       </div>
     </div>
 
-    {/* <div style={ !logout ? { display: "none" } : {} } >
+    <div style={ !logout ? { display: "none" } : {} } >
 
           <h3>You have been logged out! 
              <br/> Sign in again to access the interface...</h3>
@@ -155,7 +151,7 @@ const ProposedMeetings = ({username}) => {
           <br/>
           <Link to={"/signin"} className="btn btn-link">Sign in</Link>
 
-      </div> */}
+      </div>
 
 
     </div>
