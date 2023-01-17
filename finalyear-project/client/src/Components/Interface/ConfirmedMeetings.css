@@ -94,6 +94,20 @@ hr.feedbackHr {
     align-items: center;
 }
 
+.meetingParticipants {
+    float: left;
+    margin-top: 50px;
+    border: 2px solid grey;
+    padding: 20px 50px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+
+.participantListHr {
+    margin: 14px 0px;
+}
+
+
 
 @media screen and (max-width: 992px) {
     

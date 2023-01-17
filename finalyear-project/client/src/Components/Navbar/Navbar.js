@@ -3,7 +3,8 @@ import { Menulist } from './Menulist'
 import './Navbar.css';
 import image from "./logo4.jpg";
 import avatar from "./avatar.jpg";
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+
 
 
 
@@ -30,7 +31,7 @@ const Navbar = ({username}) => {
     const [change, setChange] = useState(false);
 
     useEffect(() => {
-        const HandleChange = () => {
+        const HandleNavbar = () => {
 
             const currentPath = window.location.pathname;
     
@@ -40,25 +41,25 @@ const Navbar = ({username}) => {
     
             for (let i = 0; i < path.length; i++) {
                 if(path[i] === currentPath) {
-                    // setChange(!change);
+    
                     setChange(true);
-                    console.log(change);  
+                    console.log("change:", change);    
                 }
             }  
 
             return;
         };
-        HandleChange();
+        HandleNavbar();
 
         return;
     });
-    
 
+   
     console.log("Username: ", username);
 
   // To check current User
   const [logout, setLogout] = useState(false);
-//   const navigate = useNavigate();
+
 
   useEffect(() => {
       const HandleChange = () => {
@@ -69,7 +70,9 @@ const Navbar = ({username}) => {
   
           if(user === currentUser) {
               setLogout(true);
-              console.log("logout: ", logout);  
+              console.log("logout: ", logout);
+              setChange(false);
+              console.log("change in logout:", change);  
           } 
           else if (user != currentUser) {
               // navigate("/signin");
@@ -77,16 +80,34 @@ const Navbar = ({username}) => {
           
           return;
       };
+
       HandleChange();
 
       return;
   });
 
+	  
+
+
+  // User dropdown
+  const [userdrop, setUserdrop] = useState(false)
+  const HandleUserDropdown = () => {
+        setUserdrop(!userdrop);
+  };
+
+  
+
+  // Logout Button
+  const HandleLogout = () => {
+
+		window.location.reload(false);
+		
+  }
+
    
 
 
     return (
-        // <header onLoad={HandleChange}>
         <header>
         <nav className="navbar">
             <Link to={'/interface'}>
@@ -104,9 +125,28 @@ const Navbar = ({username}) => {
                 <ul className={clicked ? "menu-list" : "menu-list close"}> {menulist} </ul>
                 </div>
                 
-                <div className='navInterface' style={ !change ? { display: "none" } : {} }>
+                <div className='navInterface' style={ (!change ) ?  { display: "none" } : {} }>
                     <i className='fa fa-cog fa-lg' ></i>
-                    <img className='profileimg' src={avatar} alt={'avatar'} height={75} width={75} />
+                    <img className='profileimg' src={avatar} alt={'avatar'} height={75} width={75}
+                        onClick={HandleUserDropdown}
+                    />
+
+                    
+
+                    {userdrop ? 
+                    
+                        <div className='userDropdown' float="right" >
+                            <br/>
+							<Link to={'/interface/manageProfile'} >
+                            	<a>Manage Profile</a>
+							</Link>
+                            <br/> <br/> <br/>
+                            	<a onClick={HandleLogout} className={'logoutBtn'} >Logout</a>
+                            
+                        </div>
+                        
+                        : ''    
+                    }
                 </div>
             
             </div>

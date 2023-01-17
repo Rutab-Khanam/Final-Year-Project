@@ -6,7 +6,7 @@ import Multiselect from 'multiselect-react-dropdown'
 const UsersList = ({username, setParticipants}) => {
 
 
-    const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
     
   //This method fetches the users from the database.

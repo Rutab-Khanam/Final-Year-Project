@@ -17,7 +17,7 @@ const ListFeedback = (props) => {
 	  <br/>
 	  </>
 	);
-  }
+}
 
 
 
@@ -44,6 +44,8 @@ const Feedbacks = ({allFeedbacks}) => {
 	    
 	);
 
+
+	
 
   return (
     <>
