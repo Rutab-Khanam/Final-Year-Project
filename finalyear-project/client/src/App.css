@@ -2,8 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", "sans-sarif";
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: "Roboto", "sans-sarif";
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 .App.container {
@@ -18,7 +18,7 @@
 .btn{
   background-color: #20B2AA;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px 85px;
 
 }

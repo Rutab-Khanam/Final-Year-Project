@@ -98,7 +98,9 @@ recordRoutes.route("/meeting/create").post(function (req, response) {
     participants: req.body.participants,
     participantsList: req.body.participantsList,
     feedbackParticipant: req.body.feedbackParticipant,
-    feedbacksList: req.body.feedbacksList
+    feedbacksList: req.body.feedbacksList,
+    agenda: req.body.agenda,
+    minutes: req.body.minutes
 
   };
   db_connect.collection("meetings").insertOne(myobj, function (err, res) {
@@ -191,7 +193,9 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       participants: req.body.participants,
       participantsList: req.body.participantsList,
       feedbackParticipant: req.body.feedbackParticipant,
-      feedbacksList: req.body.feedbacksList
+      feedbacksList: req.body.feedbacksList,
+      agenda: req.body.agenda,
+      minutes: req.body.minutes
     },
   };
   db_connect
@@ -247,7 +251,7 @@ recordRoutes.route("/user").get(function (req, res) {
  });
 
 
- // Edit button
+
 // This section will help you get a single user by id
 recordRoutes.route("/user/:id").get(function (req, res) {
   let db_connect = dbo.getDb();

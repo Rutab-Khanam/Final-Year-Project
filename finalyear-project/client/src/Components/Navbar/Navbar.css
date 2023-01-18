@@ -9,6 +9,11 @@ nav {
     z-index: 99;
 }
 
+.menu-list * {
+    font-family: "Roboto", "sans-sarif";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 /* .navHome {
     display: none;
@@ -40,10 +45,12 @@ i.fa.fa-cog{
     text-decoration: none;
     color: #20B2AA;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     padding: 15px 28px;
     margin-left: 20px;
     border-radius: 4px;
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .menu-list li:nth-last-child(2) a{
@@ -51,7 +58,7 @@ i.fa.fa-cog{
 }
 
 .menu-list li:last-child a{
-    font-weight: 500;
+    font-weight: 600;
     padding: 15px 28px;
     background-color: #20B2AA;
     color: white;

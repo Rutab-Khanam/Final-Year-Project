@@ -4,6 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "@fontsource/fira-code";
+import "@compai/font-jet-brains-mono";
+import "fontsource-cascadia-code";
+import "segoe-fonts";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -39,6 +39,8 @@ const View = ({username}) => {
     selectDate: [],
     participants: [],
     participantsList: [],
+    agenda: "",
+    minutes: "",
     meetings: [],
   });
   const params = useParams();
@@ -62,6 +64,7 @@ const View = ({username}) => {
         return;
       }
   
+      console.log("meeting.agenda:", meeting.agenda);
       setForm(meeting);
     }
   
@@ -76,12 +79,7 @@ const View = ({username}) => {
     console.log(e);
     const {name, value} = e.target;
     
-    // const participantDates = form.datesSelected;
-    // const select = form.selectDate; 
-
-    // form.selectDate = selectedDates;
-    
-    // console.log("form.datesSelected:", participantDates);
+    console.log("form.agenda:", form.agenda);
 
     setForm((preval) => {
         return{
@@ -306,6 +304,38 @@ useEffect(() => {
             </ul>
             
         </div>
+
+        <br/>
+            <div className='input18'>
+            <label htmlFor='agenda'><b>Meeting Agenda:</b></label>
+            <br/>
+            <textarea 
+                rows={4} cols={50}
+                id={'agenda'} 
+                // placeholder={'Agenda of meeting...'} 
+                required
+                name={'agenda'}
+                value={form.agenda}
+                onChange={updateForm}
+                disabled
+            />
+            </div>
+
+            <br/>
+            <div>
+            <label htmlFor='minutes'><b>Minutes of Meeting:</b></label>
+            <br/>
+            <textarea 
+                rows={4} cols={50}
+                id={'minutes'} 
+                // placeholder={'Minutes of meeting...'} 
+                required
+                name={'minutes'}
+                value={form.minutes}
+                onChange={updateForm}
+                disabled
+            />
+            </div>
 
         <br/> <br/>
         <div className='input12'>

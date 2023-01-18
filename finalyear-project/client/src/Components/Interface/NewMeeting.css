@@ -7,6 +7,11 @@
     z-index: 2;
 }
 
+.newMeetingForm *:not(.fa) {
+    font-family: "Roboto", "sans-sarif";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .newMeeting p {
     text-align: center;
     font-size: 32px;
@@ -55,6 +60,7 @@ textarea {
     color: black;
     font-size: 18px;
     text-decoration: none;
+    float: right;
 }
 
 textarea {

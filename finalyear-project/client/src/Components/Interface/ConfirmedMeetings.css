@@ -8,6 +8,11 @@
     padding: 30px;
 }
 
+.newMeetingForm *:not(.fa) {
+    font-family: "Roboto", "sans-sarif";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 hr.confirmedHr {
     width: 445%;
     margin-bottom: 10px;
@@ -105,6 +110,15 @@ hr.feedbackHr {
 
 .participantListHr {
     margin: 14px 0px;
+}
+
+.input17 {
+    margin-right: 150px;
+    margin-top: 20px;
+}
+
+.input18 {
+    margin-right: 300px;
 }
 
 

@@ -27,7 +27,9 @@ const NewMeeting = ({username}) => {
         participants:[],
         participantsList:[],
         feedbackParticipant:[],
-        feedbacksList:[]
+        feedbacksList:[],
+        agenda: "",
+        minutes: "",
     });
 
     const navigate = useNavigate(); 
@@ -77,7 +79,7 @@ const NewMeeting = ({username}) => {
         setForm({ id:"", title:"", description:"", start_time:"", duration:"",
                     status:"", location:"", password:"", dates:[], datesSelected:[],
                     selectDate:[], createdAt:"", updatedAt:"", host:"", participants:[], 
-                    participantsList:[], feedbackParticipant:[], feedbacksList:[] });
+                    participantsList:[], feedbackParticipant:[], feedbacksList:[], agenda:"", minutes:"" });
         
         
         alert("New Meeting Created Successfully!");

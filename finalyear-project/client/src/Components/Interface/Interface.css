@@ -2,15 +2,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* min-height: 80vh; */
     position: relative;
     z-index: 2;
 }
 
+
+.menus *:not(.fa, .quot) {
+    font-family: "Roboto", "sans-sarif";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
 .quot {
     margin-top: 10px;
     margin-bottom: 55px;
-    font-family:'Courier New', Courier, monospace;
+    /* font-family:'Courier New', Courier, monospace; */
+    font-family: "Segoe Print";
     font-size: 24px;
     font-weight: 400px;
     color: black;
@@ -25,7 +32,7 @@
 .interfacebtn {
     margin: 10px;
     margin-bottom: 10px;
-    font-size: 21px;
+    font-size: 23px;
     font-weight: 500;
     background-color: #20B2AA;
     color: white;
@@ -33,6 +40,7 @@
     border: none;
     border-radius: 10px;
     text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .interfacebtn:hover {

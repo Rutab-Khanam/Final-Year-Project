@@ -9,6 +9,11 @@
     justify-content: center;
 }
 
+.meetingForm * {
+    font-family: "Roboto", "sans-sarif";
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .proposedMeetings p {
     text-align: center;
     font-size: 32px;
