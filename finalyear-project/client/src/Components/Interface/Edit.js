@@ -49,6 +49,8 @@ const Edit = ({username}) => {
         participantsList:[],
         feedbackParticipant:{},
         feedbacksList:[],
+        agenda:"",
+        minutes:"",
         meetings: [],
       });
       const params = useParams();
@@ -128,7 +130,9 @@ const Edit = ({username}) => {
           participants: form.participants,
           participantsList: form.participantsList,
           feedbackParticipant: form.feedbackParticipant,
-          feedbacksList: form.feedbacksList
+          feedbacksList: form.feedbacksList,
+          agenda: form.agenda,
+          minutes: form.minutes
         };
       
         // This will send a post request to update the data in the database.
@@ -152,6 +156,7 @@ const Edit = ({username}) => {
     let listValid = false;
     console.log("participant in update: ", participant);
     console.log("participantsList:", form.participantsList);
+    console.log(form.participantsList.length);
     console.log("validd:", validd);
     console.log("listValid:", listValid);
     
@@ -206,7 +211,9 @@ const Edit = ({username}) => {
           participants: form.participants,
           participantsList: form.participantsList,
           feedbackParticipant: form.feedbackParticipant,
-          feedbacksList: form.feedbacksList
+          feedbacksList: form.feedbacksList,
+          agenda: form.agenda,
+          minutes: form.minutes
         };
       
         console.log(participant.length);
@@ -272,6 +279,32 @@ const Edit = ({username}) => {
     /> 
       
   );
+
+
+  // form validation
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [isValid, setValid] = useState(false);
+  const participantsLength = form.participantsList.length;
+
+  const validity = (e) => {
+    
+    if(participantsLength > 0) {
+      
+        setShowErrorMessage(false);
+        setValid(true);
+
+    } else {
+        setShowErrorMessage(true);
+        setValid(false);
+    }
+  }
+
+  useEffect(() => {
+
+      validity();
+
+  }, [participant]);
+
 
 
   //     for(let i=0; i<participants.length; i++) {
@@ -468,11 +501,17 @@ const Edit = ({username}) => {
             </div>
 
             <br/> <br/>
+
+            <div className='input15'>
+
+            {showErrorMessage ? <div className='passError2' > Please invite participants to fix meeting.. </div> : ''}
+
+            </div>
+
             <div className='input13'>
 
-            {/* <InviteParticipants setParticipant={setParticipant} username={username} /> */}
+            <button className='fixbtn' disabled={!isValid} >Fix Meeting</button>
 
-            <button className='savebtn'>Fix Meeting</button>
             </div>
 
           </form>

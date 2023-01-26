@@ -8,13 +8,13 @@
     padding: 30px;
 }
 
-.newMeetingForm *:not(.fa) {
+.confirmedMeetings *:not(.fa) {
     font-family: "Roboto", "sans-sarif";
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 hr.confirmedHr {
-    width: 445%;
+    width: 365%;
     margin-bottom: 10px;
 }
 
