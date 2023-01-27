@@ -3,8 +3,10 @@ import './Signup.css';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 // import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
+// var nodemailer = require('nodemailer');
 
 
 const Signup = () => {
@@ -269,9 +271,6 @@ const Signup = () => {
             </div>
             <button type='submit' >Sign Up</button>
 
-            <ToastContainer 
-            position='top-center' autoClose={5000} hideProgressBar={false}
-            newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
             
         </form>

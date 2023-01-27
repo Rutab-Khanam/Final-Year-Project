@@ -5,6 +5,7 @@ import Back from './Back';
 import InviteParticipants from './InviteParticipants';
 
 var random = require('random-string-alphanumeric-generator');
+// var nodemailer = require('nodemailer');
 
 
 const NewMeeting = ({username}) => {
