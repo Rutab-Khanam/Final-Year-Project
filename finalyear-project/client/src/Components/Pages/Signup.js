@@ -6,7 +6,7 @@ import PhoneInput from 'react-phone-number-input'
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
-// var nodemailer = require('nodemailer');
+
 
 
 const Signup = () => {
@@ -23,6 +23,15 @@ const Signup = () => {
         gender:""
     })
 
+    const [mailerState, setMailerState] = useState({
+        name: "",
+        email: "",
+        message: "You have successfully registered in Liaison!",
+    });
+
+    const newcurrentUser = [];
+    const participantEmails = [];
+
     const handleInputs = (e) => {
         console.log(e);
         const {name, value} = e.target;
@@ -30,7 +39,16 @@ const Signup = () => {
         user.phoneNo = phoneNo;
         user.password = password;
 
+        mailerState.email = user.email;
+
         setUser((preval) => {
+            return{
+                ...preval,
+                [name]: value
+            }
+        })
+
+        setMailerState((preval) => {
             return{
                 ...preval,
                 [name]: value
@@ -38,11 +56,50 @@ const Signup = () => {
         })
  
     }
+
+
+    const submitEmail = async (e) => {
+        // e.preventDefault();
+        console.log("participants email:", participantEmails);
+
+        const newEmail = { ...mailerState };
+        console.log("newEmail:", newEmail);
+        // console.log({ mailerState });
+        const response = await fetch("http://localhost:5000/sendInvite", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newEmail),
+        })
+        // .then((response) => response.json())
+        const result = await response.json();
+        console.log("result:", result);
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+        
+            setMailerState({
+                email: "",
+                name: "",
+                message: ""
+            });
+        
+
+        console.log("mailerState.email:", mailerState.email);
+    };
     
+
+    
+
 
     // This function will handle the submission.
     async function onSubmit(e) {
         e.preventDefault();
+
+        submitEmail();
   
         // When a post request is sent to the create url, we'll add a new record to the database.
         const newUser = { ...user };
@@ -111,11 +168,6 @@ const Signup = () => {
         setIsCPasswordDirty(true);
     }
 
-
-    //Success Alert
-    // const [status, setStatus] = useState(false);
-    // const [type, setType] = useState("");
-    // const [title, setTitle] = useState("");
 
 
 

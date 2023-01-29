@@ -53,6 +53,16 @@ const Edit = ({username}) => {
         minutes:"",
         meetings: [],
       });
+
+      const [mailerState, setMailerState] = useState({
+          name: "",
+          email: "",
+          message: "",
+      });
+
+      const newcurrentUser = [];
+      const participantEmails = [];
+
       const params = useParams();
       const navigate = useNavigate();
       
@@ -83,6 +93,37 @@ const Edit = ({username}) => {
       
         return;
       }, [params.id, navigate]);
+
+
+      const [users, setUsers] = useState([]);
+
+      //This method fetches the users from the database.
+      useEffect(() => {
+        async function getUsers(callback) {
+          const response = await fetch(`http://localhost:5000/user/`);
+
+          if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+
+          const users = await response.json();
+          setUsers(users);
+          console.log("users:", users);
+          console.log("users.username: ", users[0]);
+        
+        }
+
+        getUsers();
+
+
+        return;
+      }, [users.length]);
+
+
+      console.log("users:", users);
+   
       
       // console.log("datesSelected: ", datesSelected);
       
@@ -215,6 +256,17 @@ const Edit = ({username}) => {
           agenda: form.agenda,
           minutes: form.minutes
         };
+
+        mailerState.name = username;
+        // mailerState.email = "foziamudassir85@gmail.com, rutabkhanam80@gmail.com";
+        mailerState.message = "You are invited for the meeting! Please check the meeting details in your interface in Invitations tab of Liaison";
+
+        // setMailerState((preval) => {
+        //     return{
+        //         ...preval,
+        //         [name]: value
+        //     }
+        // })
       
         console.log(participant.length);
 
@@ -233,6 +285,13 @@ const Edit = ({username}) => {
             // console.log(editedPerson.participants);
             console.log("Participants Invited!");
         }
+
+
+        if(form.participantsList.length > 0) {
+          submitEmail();
+          console.log("Email sent!");
+          // console.log(mailerState.email);
+      }
         
 
     }
@@ -303,7 +362,64 @@ const Edit = ({username}) => {
 
       validity();
 
+      const participantsListForm = form.participantsList;
+
+      users.map((item) => {
+        let checkUser = participantsListForm.includes(item.username);
+
+        if(checkUser) {
+            console.log(item);
+            newcurrentUser.push(item);
+            console.log("newCurrentUser:", newcurrentUser);
+            participantEmails.push(item.email);
+        }
+      })
+    
+      console.log(participantEmails);
+      console.log(participantEmails.toString());
+      const participantEmailsString = participantEmails.join(', ');
+      console.log(participantEmailsString);
+
+      mailerState.email = participantEmailsString;
+
+      console.log(mailerState.email);
+      console.log(mailerState.email.toString());
+
   }, [participant]);
+
+
+  const submitEmail = async (e) => {
+    // e.preventDefault();
+    console.log("participants email:", participantEmails);
+
+    const newEmail = { ...mailerState };
+    console.log("newEmail:", newEmail);
+    // console.log({ mailerState });
+    const response = await fetch("http://localhost:5000/sendInvite", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newEmail),
+    })
+    // .then((response) => response.json())
+    const result = await response.json();
+    console.log("result:", result);
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+    
+        setMailerState({
+            email: "",
+            name: "",
+            message: ""
+        });
+    
+
+      console.log("mailerState.email:", mailerState.email);
+};
 
 
 
