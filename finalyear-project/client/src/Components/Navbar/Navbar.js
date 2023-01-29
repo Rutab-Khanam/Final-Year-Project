@@ -74,7 +74,7 @@ const Navbar = ({username}) => {
               setChange(false);
               console.log("change in logout:", change);  
           } 
-          else if (user != currentUser) {
+          else if (user !== currentUser) {
               // navigate("/signin");
           }
           

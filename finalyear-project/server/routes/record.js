@@ -1,4 +1,5 @@
 const express = require("express");
+
  
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -263,6 +264,56 @@ recordRoutes.route("/user/:id").get(function (req, res) {
       res.json(result);
     });
  });  
+
+
+
+
+// //Invite Email
+// recordRoutes.route("/sendInvite").post(function (req, res) {
+//   let mailOptions = {
+//     from: `${req.body.mailerState.email}`,
+//     to: process.env.EMAIL,
+//     subject: `Message from: ${req.body.mailerState.email}`,
+//     text: `${req.body.mailerState.message}`,
+//   };
+
+//   transporter.sendMail(mailOptions, function (err, data) {
+//     if(err) {
+//       res.json({
+//         status: "fail",
+//       });
+//     } else {
+//       console.log("== Message Sent!");
+//       res.json({
+//         status: "success",
+//       });
+//     }
+//   });
+
+// });
+
+// app.post("/sendInvite", function (req, res) {
+//   let mailOptions = {
+//     from: `${req.body.mailerState.email}`,
+//     to: process.env.EMAIL,
+//     subject: `Message from: ${req.body.mailerState.email}`,
+//     text: `${req.body.mailerState.message}`,
+//   };
+ 
+//   transporter.sendMail(mailOptions, function (err, data) {
+//     if (err) {
+//       res.json({
+//         status: "fail",
+//       });
+//     } else {
+//       console.log("== Message Sent ==");
+//       res.json({
+//         status: "success",
+//       });
+//     }
+//   });
+// });
+ 
 
 
 

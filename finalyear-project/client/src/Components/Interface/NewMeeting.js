@@ -31,7 +31,17 @@ const NewMeeting = ({username}) => {
         feedbacksList:[],
         agenda: "",
         minutes: "",
+        mailerState: {}
     });
+
+    const [mailerState, setMailerState] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+
+    const newcurrentUser = [];
+    const participantEmails = [];
 
     const navigate = useNavigate(); 
 
@@ -55,7 +65,55 @@ const NewMeeting = ({username}) => {
                 [name]: value
             }
         })
+
+        console.log("participant emails:", participantEmails);   
+        
+
+        mailerState.name = username;
+        // mailerState.email = "foziamudassir85@gmail.com, rutabkhanam80@gmail.com";
+        mailerState.message = "You are invited for the meeting! Please check the meeting details in your interface in Invitations tab of Liaison";
+
+        setMailerState((preval) => {
+            return{
+                ...preval,
+                [name]: value
+            }
+        })
     }
+
+
+
+    const [users, setUsers] = useState([]);
+
+    //This method fetches the users from the database.
+  useEffect(() => {
+    async function getUsers(callback) {
+      const response = await fetch(`http://localhost:5000/user/`);
+
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const users = await response.json();
+      setUsers(users);
+      console.log("users:", users);
+      console.log("users.username: ", users[0]);
+        
+    }
+
+    getUsers();
+
+
+    return;
+  }, [users.length]);
+
+
+  console.log("users:", users);
+   
+
+
 
     
     // This function will handle the submission.
@@ -82,6 +140,14 @@ const NewMeeting = ({username}) => {
                     selectDate:[], createdAt:"", updatedAt:"", host:"", participants:[], 
                     participantsList:[], feedbackParticipant:[], feedbacksList:[], agenda:"", minutes:"" });
         
+        console.log("form.participantsList:", form.participantsList);
+        console.log("title:", form.title);
+
+        if(form.participantsList.length > 0) {
+            submitEmail();
+            console.log("Email sent!");
+            // console.log(mailerState.email);
+        }
         
         alert("New Meeting Created Successfully!");
         
@@ -141,14 +207,81 @@ const NewMeeting = ({username}) => {
               
               if(!check) {
                 form.participantsList.push(item);
-            }
+              }
         })
         console.log("participantsList:", form.participantsList);
-        // if((participantCheck == false) ) {
-        //     form.participantsList.push(...participant);
-        // }
+        
+
+        users.map((item) => {
+            let checkUser = participantsListForm.includes(item.username);
+
+            if(checkUser) {
+                console.log(item);
+                newcurrentUser.push(item);
+                console.log("newCurrentUser:", newcurrentUser);
+                participantEmails.push(item.email);
+            }
+        })
+
+        
+        console.log(participantEmails);
+        console.log(participantEmails.toString());
+        const participantEmailsString = participantEmails.join(', ');
+        console.log(participantEmailsString);
+
+        mailerState.email = participantEmailsString;
+
+        console.log(mailerState.email);
+        console.log(mailerState.email.toString());
+
         
     }, [participant]);
+
+
+
+    const submitEmail = async (e) => {
+        // e.preventDefault();
+        console.log("participants email:", participantEmails);
+
+        const newEmail = { ...mailerState };
+        console.log("newEmail:", newEmail);
+        // console.log({ mailerState });
+        const response = await fetch("http://localhost:5000/sendInvite", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newEmail),
+        })
+        // .then((response) => response.json())
+        const result = await response.json();
+        console.log("result:", result);
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+        // .then(async (response) => {
+        //     const resData = await response;
+        //     console.log(resData);
+        //     if (resData.status === "success") {
+        //         console.log("Email Message Sent");
+        //         console.log("mailerState:", mailerState);
+        //     } else if (resData.status === "fail") {
+        //         console.log("Email Message failed to send");
+        //     }
+        // })
+        // .then(() => {
+            setMailerState({
+                email: "",
+                name: "",
+                message: ""
+            });
+        // });
+
+        console.log("mailerState.email:", mailerState.email);
+    };
+
 
 
     const updateDates = (e) => {

@@ -128,7 +128,7 @@ const UsersList = ({username, setParticipants}) => {
         console.log("selectedUsers inside: ", selectedUsers);   
         console.log("setParticipants in UsersList: ", setParticipants);
         setParticipants(selectedUsers);
-        // setSelectedParticipants()
+
     }
 
     useEffect(() => {
